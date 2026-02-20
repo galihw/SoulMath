@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+
+        <title>SoulMath</title>
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link media="all" type="text/css" rel="stylesheet" href="index.css">
+
+    </head>
+    <body>
+		<header>
+            <a href="#">SoulMath - 0898-6989-406</a>
+        </header>
+
+        <div class="container">
+            <div id="content">
+                <h1>Soul Math</h1>
+                Berisi soal-soal matematika untuk latihan.<br>
+                Disertai dengan kunci jawaban.<br>
+                Angka, gambar, pilihan jawaban, dan kunci jawaban diacak.<br>
+            </div>
+            <img src="logo.png" />
+        </div>
+
+        <footer>
+            <ul>
+                <li>
+                    <span>Generator Soal</span>
+					Berisi soal-soal yang dapat dipilih sesuai keinginan dengan maksimal 20 soal.<br>
+					<td><button id="btnSD" class="model" onclick="FuncGenerator(1)">SD</button></td>
+					<br>
+					<td><button id="btnSMP" class="model" onclick="FuncGenerator(2)">SMP</button></td>
+                </li>
+                <li>
+                    <span>Kumpulan Soal</span>
+					Berisi kumpulan soal-soal SD dan SMP dalam bentuk tab.<br>
+                    <td><button id="btnKumpulan" class="model" onclick="FuncKumpulan()">PerBab</button></td> 
+                </li>
+                <li>
+                    <span>Campur Soal</span>
+					Berisi kumpulan soal yang langsung di acak sebanyak 20 soal.<br>
+                    <td><button id="btnRandom1" class="model" onclick="FuncRandom(1)">Campur SD</button></td>
+					<br>
+                    <td><button id="btnRandom2" class="model" onclick="FuncRandom(2)">Campur SMP</button></td>
+                </li>
+
+                <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
+                <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
+                <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
+            </ul>
+        </footer>
+		<script>
+			function FuncGenerator(no){
+				if(no==1)	window.parent.location.href="GeneratorSoalMatematikaSD.html";
+				else 		window.parent.location.href="GeneratorSoalMatematikaSMP.html";
+			}
+			function FuncKumpulan(){
+				window.parent.location.href="Tentang.html";
+			}
+			function FuncRandom(no){
+				if(no==1)	window.parent.location.href="RandomSoalMatematikaSD.html";
+				else		window.parent.location.href="RandomSoalMatematikaSMP.html";
+			}
+		</script>
+    </body>
+</html>
