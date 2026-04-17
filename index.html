@@ -44,6 +44,13 @@
 					<br>
                     <td><button id="btnRandom2" class="model" onclick="FuncRandom(2)">Mix SMP</button></td>
                 </li>
+                <li>
+                    <span>Paket</span>
+					Berisi kumpulan soal Paket Kelas-Bab dengan banyak soal sesuai data.<br>
+                    <td><button id="btnPaket1" class="model" onclick="FuncPaket(1)">Paket SD</button></td>
+					<br>
+                    <td><button id="btnPaket2" class="model" onclick="FuncPaket(2)">Paket SMP</button></td>
+                </li>
 
                 <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
                 <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
@@ -61,6 +68,10 @@
 			function FuncRandom(no){
 				if(no==1)	window.parent.location.href="RandomSoalMatematikaSD.html";
 				else		window.parent.location.href="RandomSoalMatematikaSMP.html";
+			}
+			function FuncPaket(no){
+				if(no==1)	window.parent.location.href="PaketSoalSD.html";
+				else		window.parent.location.href="PaketSoalSMP.html";
 			}
 			function Contact(){
 				window.parent.location.href="https://wa.me/628986989406";

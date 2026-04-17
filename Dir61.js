@@ -1220,7 +1220,7 @@ function Print61(no,d1,c1,d2,c2,d3,c3,d4,nourut){
 			inside++;
 			if(inside==1){
 				var len = ss1.length*6.7;
-				console.log(len)
+				//console.log(len)
 				ctx.drawImage(base1_image, 0, 0,base1_image.width, base1_image.height);
 				ctx.font = "16px Times New Roman";
 				ctx.textAlign = "center";

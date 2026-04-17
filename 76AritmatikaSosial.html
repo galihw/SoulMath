@@ -556,7 +556,7 @@
 						ctx.textAlign = "center";
 						for(var i=0;i<4;i++){
 							ctx.fillText("Harga",58+120*i,50+dy);
-							ctx.fillText("Rp"+harga[i]+",00",58+120*i,70+dy);
+							ctx.fillText("Rp"+StringRibuan(harga[i])+",00",58+120*i,70+dy);
 							ctx.fillText(teks2[i],58+120*i,100+dy);
 							ctx.fillText(teks3[i],58+120*i,120+dy);
 						}
@@ -842,7 +842,7 @@
 					var hasil=aritmatika[2];
 					
 					const termurah = HargaProperti5(canv);
-					var Toko1 = ["Toko Rame","Toko Damai","Toko Seneng","Toko Indah"];
+					var Toko1 = ["Toko Rame","Toko Damai","Toko Senang","Toko Indah"];
 					var Toko2 = [];
 					
 					//Ali akan membeli sebuah baju dan celana di toko yang sama. 
