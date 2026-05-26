@@ -52,8 +52,40 @@
                     <td><button id="btnPaket2" class="model" onclick="FuncPaket(2)">Paket SMP</button></td>
                 </li>
 
-                <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
-                <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
+                <li>
+                    <span>Tes</span>
+					Berisi Tes tanpa waktu dan Tes dengan waktu.<br><br>
+					Kurikulum Merdeka.<br>
+					Tes :<br>
+                    <td><button id="btnTes1" class="model" onclick="FuncTes(1)">7-1</button></td>
+                    <td><button id="btnTes2" class="model" onclick="FuncTes(2)">7-2</button></td>
+                    <td><button id="btnTes3" class="model" onclick="FuncTes(3)">7-3</button></td>
+                    <td><button id="btnTes4" class="model" onclick="FuncTes(4)">7-4</button></td>
+                    <td><button id="btnTes5" class="model" onclick="FuncTes(5)">7-5</button></td>
+                    <td><button id="btnTes6" class="model" onclick="FuncTes(6)">7-6</button></td>
+					<br>
+                    <td><button id="btnTes7" class="model" onclick="FuncTes(7)">8-1</button></td>
+                    <td><button id="btnTes8" class="model" onclick="FuncTes(8)">8-2</button></td>
+                    <td><button id="btnTes9" class="model" onclick="FuncTes(9)">8-3</button></td>
+                    <td><button id="btnTes10" class="model" onclick="FuncTes(10)">8-4</button></td>
+                    <td><button id="btnTes11" class="model" onclick="FuncTes(11)">8-5</button></td>
+                    <td><button id="btnTes12" class="model" onclick="FuncTes(12)">8-6</button></td>
+					<br>
+					Tes - Waktu:<br>
+                    <td><button id="btnTesW1" class="model" onclick="FuncTesW(1)">W7-1</button></td>
+                    <td><button id="btnTesW2" class="model" onclick="FuncTesW(2)">W7-2</button></td>
+                    <td><button id="btnTesW3" class="model" onclick="FuncTesW(3)">W7-3</button></td>
+                    <td><button id="btnTesW4" class="model" onclick="FuncTesW(4)">W7-4</button></td>
+                    <td><button id="btnTesW5" class="model" onclick="FuncTesW(5)">W7-5</button></td>
+                    <td><button id="btnTesW6" class="model" onclick="FuncTesW(6)">W7-6</button></td>
+					<br>
+                    <td><button id="btnTesW7" class="model" onclick="FuncTesW(7)">W8-1</button></td>
+                    <td><button id="btnTesW8" class="model" onclick="FuncTesW(8)">W8-2</button></td>
+                    <td><button id="btnTesW9" class="model" onclick="FuncTesW(9)">W8-3</button></td>
+                    <td><button id="btnTesW10" class="model" onclick="FuncTesW(10)">W8-4</button></td>
+                    <td><button id="btnTesW11" class="model" onclick="FuncTesW(11)">W8-5</button></td>
+                    <td><button id="btnTesW12" class="model" onclick="FuncTesW(12)">W8-6</button></td>
+                </li>
                 <li> <!-- Ulangi lagi tiga kali sehingga sekarang kita punya 6 list -->
             </ul>
         </footer>
@@ -72,6 +104,42 @@
 			function FuncPaket(no){
 				if(no==1)	window.parent.location.href="PaketSoalSD.html";
 				else		window.parent.location.href="PaketSoalSMP.html";
+			}
+			function FuncTes(no){
+				var linkhtml = ["",
+								"Tes71BilanganBulat.html",
+								"Tes72BilanganRasional.html",
+								"Tes73Rasio.html",
+								"Tes74BentukAljabar.html",
+								"Tes75Kesebangunan.html",
+								"Tes76DatadanDiagram.html",
+								"Tes81BilanganBerpangkat.html",
+								"Tes82TeoremaPythagoras.html",
+								"Tes83PersamaanLinierdanPertidaksamaanLinierSatuVariabel.html",
+								"Tes84RelasidanFungsi.html",
+								"Tes85PersamaanGarisLurus.html",
+								"Tes86Statistika.html"
+								]
+				window.parent.location.href=linkhtml[no];
+				console.log(linkhtml[no])
+			}
+			function FuncTesW(no){
+				var linkhtml = ["",
+								"TesWaktu71BilanganBulat.html",
+								"TesWaktu72BilanganRasional.html",
+								"TesWaktu73Rasio.html",
+								"TesWaktu74BentukAljabar.html",
+								"TesWaktu75Kesebangunan.html",
+								"TesWaktu76DatadanDiagram.html",
+								"TesWaktu81BilanganBerpangkat.html",
+								"TesWaktu82TeoremaPythagoras.html",
+								"TesWaktu83PersamaanLinierdanPertidaksamaanLinierSatuVariabel.html",
+								"TesWaktu84RelasidanFungsi.html",
+								"TesWaktu85PersamaanGarisLurus.html",
+								"TesWaktu86Statistika.html"
+								]
+				window.parent.location.href=linkhtml[no];
+				console.log(linkhtml[no])
 			}
 			function Contact(){
 				window.parent.location.href="https://wa.me/628986989406";
