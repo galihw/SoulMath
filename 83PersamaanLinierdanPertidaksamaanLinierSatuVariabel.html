@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			body {
+			  margin: 0;
+			  font-family: Arial, Helvetica, sans-serif;
+			}
+
+			.topnav {
+			  overflow: hidden;
+			  background-color: #333;
+			}
+
+			.topnav a {
+			  float: left;
+			  color: #f2f2f2;
+			  text-align: center;
+			  padding: 14px 16px;
+			  text-decoration: none;
+			  font-size: 17px;
+			}
+
+			.topnav a:hover {
+			  background-color: #ddd;
+			  color: black;
+			}
+
+			.topnav a.active {
+			  background-color: #ddd;
+			  color: black;
+			}
+
+			/* Create a right-aligned (split) link inside the navigation bar */
+			.topnav a.split {
+			  float: right;
+			  background-color: #04AA6D;
+			  color: white;
+			}
+			.cont {
+			  padding: 14px 14px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="topnav">
+			<a href="Tentang.html">Tentang</a>
+			<a href="Kelas3.html">Kelas 3</a>
+			<a href="Kelas4.html">Kelas 4</a>
+			<a href="Kelas5.html">Kelas 5</a>
+			<a href="Kelas6.html">Kelas 6</a>
+			<a href="Kelas7.html">Kelas 7</a>
+			<a class="active" href="Kelas8.html">Kelas 8</a>
+			<a href="Kelas9.html">Kelas 9</a>
+			<a href="index.html" class="split">Home</a>
+		</div>
+		<h2 class="cont">Kelas 8 - Bab 3 : Persamaan Linier dan Pertidaksamaan Linier Satu Variabel</h2>
+		<a class="cont" href="https://www.defantri.com/2022/01/pembahasan-eksponen-dan-bentuk-akar-matematika-smp.html">Sumber soal statis</a>
+		<script>
+			function Print83(no,d1,c1,d2,c2,d3,c3,d4,nourut){
+				function RandomMyArray(Arr){
+					for (var i=0; i<Arr.length; i++){
+						var r = Math.floor(Math.random() * Arr.length);
+						var a = Arr[i];
+						Arr[i] = Arr[r];
+						Arr[r] = a;
+					}
+					return Arr
+				}
+				function NoJawabanBenar(Arr, jwb){
+					for (var i=0; i<Arr.length; i++){
+						if (Arr[i]==jwb){
+							return i;
+							break;
+						}
+					}
+				}
+				function GetABCD(no){
+					var ABCD = ["A","B","C","D"]
+					return ABCD[no]
+				}
+				function RandomAngkaAtoB(a,b){ 
+					var r = a+Math.ceil(Math.random() * b);
+					return r;
+				}
+				function RandomBeberapaAngka(n,a,b){
+					aa = [];
+					for(var i=0; i<n; i++){
+						aa.push(RandomAngkaAtoB(a,b));
+					}
+					return aa;
+				}
+				function SplitString(ff){
+					var gg = new Array();
+					var strff = ""+ff;
+					var len = strff.length;
+					for (var i=0; i<len; i++){
+						gg.push(strff.substr(i,1));
+					}
+					return gg;
+				}
+				function StringRibuan(str){
+					var strfix = "";
+					var arfix = new Array();
+					var StrArray = SplitString(str);
+					for (var i=0; i<StrArray.length; i++){
+						arfix.push(StrArray[i]);
+					}
+					var ct = 0;
+					var m = 0;
+					var n = 0;
+					var ctmax = StrArray.length;
+					var arct = new Array();
+					for (var i=StrArray.length-1; i>=0; i--){
+						ct++;
+						ctmax--;
+						if(ct==3){
+							ct = 0;
+							m++;
+							arct.push(3);
+						}
+					}
+					var n = StrArray.length - 3*arct.length;
+					var iter=-1;
+					strfix="";
+					for (var i=0; i<n; i++){
+						iter++;
+						strfix += arfix[iter];
+					}
+					if (n>0)
+						strfix += ".";
+					for (var i=0; i<m; i++){
+						for (j=0; j<3; j++){
+							iter++;
+							strfix += arfix[iter];
+						}
+						strfix += ".";
+					}
+					var leng = strfix.length;
+					strfix = strfix.substr(0, leng-1);
+					return strfix
+				}
+				function Mods(m,n){
+					var m0b = m;
+					var m0 = m;
+					var ct = 0;
+					do{
+						m0b = m0;
+						m0-=n;
+						ct++;
+					}while(m0>=0);
+					
+					var sisa = Math.abs(m0b);
+					return sisa;
+				}
+				function BilanganPrimaMaksN(p){
+					ArrPrime = new Array();
+					for(m=2; m<=p; m++){
+						f = CekPrimaN(m)==1;
+						if (f){
+							ArrPrime.push(m);
+						}
+					}
+					return ArrPrime;
+				}
+				function CekPrimaN(a) {
+					//https://www.autohotkey.com/board/topic/47325-isprime-check-if-number-is-prime/
+					//Laszlo
+					//Moderators
+					//4713 posts
+					//Metode dengan akar dan pembulatan ke bawah
+					
+					for(var i=1;i<=Math.floor(Math.sqrt(a)-1);i++){
+						var f = Mods(a,i+1);
+						if(!f){
+							return 0;
+						}
+					}
+					
+					return 1;
+				}
+				function APangkatN(a,n){
+					var num = 1;
+					for(var i=1;i<=n;i++){
+						num *= a;
+					}
+					return num;
+				}
+				function NamaPulauIndonesia(){
+					var Ar = ["Jawa","Sumatera","Sulawesi","Kalimantan","Papua","Riau","Maluku","Sumbawa","Flores"];
+					Ar = RandomMyArray(Ar)
+					return Ar
+				}
+				function Maksimum(ar){
+					var max = ar[0];
+					for(var i=1;i<ar.length;i++){
+						if(max < ar[i]){
+							max = ar[i];
+						}
+					}
+					return max;
+				}
+				function Minimum(ar){
+					var mini = ar[0];
+					for(var i=1;i<ar.length;i++){
+						if(mini > ar[i]){
+							mini = ar[i];
+						}
+					}
+					return mini;
+				}
+				function CariFPB(ar){
+					//https://www.ketutrare.com/2019/05/contoh-aplikasi-fpb-dan-kpk-menggunakan-bahasa-c.html
+					
+					var min = 0;
+					var max = 0;
+					for(var i=0;i<ar.length;i++){
+						min = Math.min(min,ar[i]);
+						max = Math.max(max,ar[i]);
+					}
+					
+					var iter = 0;
+					var fpb = 1;
+					var f = [];
+					do {
+						iter++;
+						ff = 1;
+						for(var i=0;i<ar.length;i++){
+							f[i] = Mods(ar[i],iter)==0;
+							ff *= f[i];
+						}
+						
+						if (ff){
+							fpb = iter;
+						}
+						fakhir = iter==max;
+					}while (!fakhir);
+					
+					return fpb;
+				}
+				function StrPow(nn){
+					var arpow = [
+								"\u{2070}",
+								"\u{00B9}",
+								"\u{00B2}",
+								"\u{00B3}",
+								"\u{2074}",
+								"\u{2075}",
+								"\u{2076}",
+								"\u{2077}",
+								"\u{2078}",
+								"\u{2079}"
+								]
+					var arnn = SplitString(nn);
+					var str = "";
+					for(var i=0;i<arnn.length;i++){
+						str+=arpow[arnn[i]];
+					}
+					return str;
+				}
+				function arraysAreEqual(arr1, arr2) {
+					if (arr1.length !== arr2.length) {
+					   return false;
+					}
+					return arr1.every((val, index) => val === arr2[index]);
+				}
+				function NoJawabanBenarEqual(Arr, jwb){
+					for (var i=0; i<Arr.length; i++){
+						if (arraysAreEqual(Arr[i], jwb)){
+							return i;
+							break;
+						}
+					}
+				}
+				function StringDesimal(ff){
+					var strff = ""+ff;
+					const gg = strff.split(".");
+					if(gg.length==2)	return gg[0]+","+gg[1];
+					else 				return ff
+				}
+				function SortAtoZ(ar){
+					ar.sort(function(a, b){return a-b});
+					return ar
+				}
+				function SortZtoA(ar){
+					ar.sort(function(a, b){return b-a});
+					return ar
+				}
+				//----------------------------------------------
+				
+				function GambarPLSV21(nmcanvas,arr){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					let a_image = new Image();
+					let b_image = new Image();
+					a_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAABSCAYAAAAhDN2zAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJBSURBVHhe7d1NTttQFIZhp0uAcYfd/4LKDMZsoXCrWMogwDE513H7PY8UJSPrOLJe7g35Of15twAE+3G+B4glhEA8IQTiCSEQTwiBeEIIxBNCIJ4QAvGEEIgnhEA8IQTiCSEQTwiBeEIIxBNCIJ4QAvGEEIgnhEA8IQTiCSEQb7cfb3r9+ev8aFkenn+fHwHc3/QQXgbwUlcMT6fTcrQf4jNTjZlqzDTftK3xCOBHEQQ4kvYQCiBQNVaW6+2e2rbGW+LX+RqhbUONmWrMVNM10zjONXuf780h3BLAx5env/edJ+nCrTFTjZlqumYax/nKHuf+rRDa+tLpSO8iEMKaPUO4mvkcbH6NUATp5pqiYkRzvXXbvCJ00TLD+rIJVHSvDoWQQzjK9rhry9fpf55py+pu5nOweWvsUyF0c03xmRHA2X8Ibvqv8XdXh94+sz8z1ZippmumcZxr9j7fm98+s9oaxa4YunBrzFRjppqumcZxVvc8x7ZPloyw2eIAW4z4rbd7alsRXvPZKtGKcF9mqjFTzRFnusXUEF66jKKVI3Aku4UQ4KimfQ0XwL9CCIF4QgjEE0IgnhAC8YQQiCeEQDwhBOIJIRBPCIF4QgjEE0IgnhAC8YQQiCeEQDwhBOIJIRBPCIF4QgjEE0IgnhAC8YQQiCeEQDwhBOIJIRBPCIF4QgjEE0IgnhAC8YQQiCeEQDwhBOIJIRBPCIF4QgjEE0IgnhAC8YQQiCeEQDwhBOIJIRBPCIF4QgjEE0Ig3LK8ASWUGtZOii0zAAAAAElFTkSuQmCC";
+					b_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAABSCAYAAAAhDN2zAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAI6SURBVHhe7d1BbtpQFIZR0yVknM7a/S+ow46bLbR9EZasSAmX+vrF9D9HQjCKL5b57Ackufz+awEI9uV6DxBLCIF4QgjEE0IgnhAC8YQQiCeEQDwhBOIJIRBPCIF4QgjEE0IgnhAC8YQQiCeEQDwhBOIJIRBPCIF4QgjEE0Ignn/eBHy6l6/fr4+W5ennj+ujeR4+hJfLZTnbUzBTjZlq/veZthHcmhlES2PglEYg34tkt+khHGeS9QZwy4wgTlkavxe9jk13XqJ3MVONmWoSZrondEcsmQ8L4dhRt3Rs2oFbY6YaM9V0zzR+3vDr+dvrfUVnENtDuD6hio5NO3BrzjbTrPd+yLA3ii3vEY4X2XqDW0SQbnuPqZYrQgHkHvcsf6Bqz1WhpfEBzPQxV4QcYU8I278+M15sZ4sA53LEp35k23tM+frMAcxUY6aahJn+dZXQdVKdEsKtsQNXHZt24NaYqcZMNZ0z3RvBI1YU03+zZOy89QZQNQJ41Nsq068IuzmD15ipxkw1nTN9dEV4VPjeevgQAo9vG8NZ8dsSQiCeP8MFxBNCIJ4QAvGEEIgnhEA8IQTiCSEQTwiBeEIIxBNCIJ4QAvGEEIgnhEA8IQTiCSEQTwiBeEIIxBNCIJ4QAvGEEIgnhEA8IQTiCSEQTwiBeEIIxBNCIJ4QAvGEEIgnhEA8IQTiCSEQTwiBeEIIxBNCIJ4QAvGEEIgnhEA8IQTiCSEQTwiBeEIIxBNCIJ4QAvGEEAi3LH8AQZwU1iVwcAQAAAAASUVORK5CYII=";
+					a_image.onload = function () {
+						CekJaw();
+					}
+					b_image.onload = function () {
+						CekJaw();
+					}
+					var inside=0;
+					function CekJaw(){
+						inside++;
+						if(inside==2){
+							for(var i=0;i<4;i++){
+								var Abjad = ["A","B","C","D"];
+								ctx.font = "16px Times New Roman";
+								ctx.textAlign = "center";
+								if(arr[i][7]=="L")	ctx.drawImage(a_image, 30, -10+82*i,a_image.width, a_image.height);
+								else				ctx.drawImage(b_image, 30, -10+82*i,b_image.width, b_image.height);
+								for(var j=0;j<7;j++){
+									ctx.fillText(arr[i][j],79+37*j,43+82*i);
+								}
+									
+								ctx.textAlign = "left";
+								ctx.fillText(Abjad[i]+".",0,22+82*i);
+							}
+						}
+					}
+					return 0;
+				}
+				function GetSoal21(canv){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var cb = cc+bb;
+						var da = dd-aa;
+						var ft1 = cb <= 0;
+						var ft2 = da <= 0;
+						var ft3 = cb%da !==0
+						var ft = ft1 || ft2 || ft3;
+						var xx = -cb/da;
+					}while(ft);
+					
+					var ss = "Himpunan penyelesaian dari "+aa+"x \u{2212} "+bb+" \u{2264} "+cc+" + "+dd+"x dengan garis bilangan ...";
+					
+					function DeretKiri(n,str){
+						var arr = [];
+						for(var i=0;i<7;i++){
+							var nn = n+i-3;
+							if(nn<0) nn = "\u{2212}"+Math.abs(nn);
+							arr.push(nn)
+						}
+						arr.push(str);
+						return arr;
+					}
+					var ar_er = [];
+					for(var i=-15;i<=15;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = DeretKiri(xx,"R")
+					Ar[1] = DeretKiri(xx+ar_er[0],"R")
+					Ar[2] = DeretKiri(xx,"L")
+					Ar[3] = DeretKiri(xx+ar_er[0],"L")
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var Gambar = GambarPLSV21(canv,Ar)
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss//+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+" </p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal20(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ee = angka[5];
+						var alas = 2*aa;
+						var atas = aa*bb-dd;
+						var bawah = aa-cc;
+						var xx = atas/bawah;
+						var luas = 1/2*alas*(xx-bb);
+						var ft1 = atas%bawah!==0;
+						var ft2 = xx<=0;
+						var ft = ft1 || ft2;
+					}while(ft)
+					
+					
+					var ss = "Diketahui segitiga dengan alas "+alas+" cm dan tinggi (x \u{2212} "+bb+") cm. "
+					ss += "<br>Jika luas segitiga tidak kurang dari ("+cc+"x \u{2212} "+dd+") cm, maka nilai x yang memenuhi adalah ...";
+					
+					var ar_er = [];
+					for(var i=-10;i<=10;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = "x \u{2265} "+xx;
+					Ar[1] = "x \u{2265} "+(xx+ar_er[0]);
+					Ar[2] = "x > "+(xx);
+					Ar[3] = "x > "+(xx+ar_er[0]);
+					if(xx+ar_er[0]<0){
+						Ar[1] = "x \u{2265} \u{2212}"+Math.abs(xx+ar_er[0]);
+						Ar[3] = "x >  \u{2212}"+Math.abs(xx+ar_er[0]);
+					}
+					if(xx<0){
+						Ar[0] = "x \u{2265} \u{2212}"+Math.abs(xx);
+						Ar[2] = "x >  \u{2212}"+Math.abs(xx);
+					}
+					
+					
+					for(var i=0;i<4;i++){
+						if(Ar[i]<0) Ar[i]="\u{2212}"+Math.abs(Ar[i]);
+					}
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal19(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					angka = RandomMyArray(angka);
+					var aa = angka[0];
+					var bb = angka[1];
+					var cc = angka[2];
+					var mm = angka[3];
+					var ma = mm*aa;
+					var mc = mm*cc;
+					var ba = bb-aa;
+					var bc = bb+cc;
+					
+					var hasil = aa+"\u{221A}"+bb;
+					
+					var ss = "Himpunan penyelesaian pertidaksamaan \u{2212}"+ma+" < "+mm+"(x \u{2212} "+bb+") < "+mc+" adalah ...";
+					
+					var ar_er = [];
+					for(var i=-15;i<=15;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					ar_er = RandomMyArray(ar_er);
+					
+					var Ar = [];
+					Ar[0] = "{x|"+(ba)+" < x < "+(bc)+", x \u{220A} R}";
+					if(ba<0)	Ar[0] = "{x|\u{2212}"+Math.abs(ba)+" < x < "+(bc)+", x \u{220A} R}";
+					do{
+						ar_er = RandomMyArray(ar_er);
+						Ar[1] = "{x|"+(ba+ar_er[0])+" < x < "+(bc)+", x \u{220A} R}";
+						if(ba+ar_er[0]<0)	Ar[1] = "{x|\u{2212}"+Math.abs(ba+ar_er[0])+" < x < "+(bc)+", x \u{220A} R}";
+						Ar[2] = "{x|"+(ba)+" < x < "+(bc+ar_er[0])+", x \u{220A} R}";
+						if(ba<0)	Ar[2] = "{x|\u{2212}"+Math.abs(ba)+" < x < "+(bc+ar_er[0])+", x \u{220A} R}";
+						Ar[3] = "{x|"+(ba+ar_er[0])+" < x < "+(bc+ar_er[0])+", x \u{220A} R}";
+						if(ba+ar_er[0]<0)	Ar[3] = "{x|\u{2212}"+Math.abs(ba+ar_er[0])+" < x < "+(bc+ar_er[0])+", x \u{220A} R}";
+						var ft = ba+ar_er[0]>bc || ba+ar_er[0]>bc+ar_er[0] || ba>bc+ar_er[0];
+					}while(ft)
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GambarPLSV18(nmcanvas,arr){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					let a_image = new Image();
+					a_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPMAAABCCAYAAACCYODvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAP+SURBVHhe7d09cuJKGIXho7sWNIGLFUgrACeOSMlEiJPJCFkAhJDdlMiJxQpgBRSBpb1oWj/jwR6BL77YiE/vUyXbNFBliz7qlj5J9jJHAG7eP9V3ADeOMANGEGbACMIMGEGYASMuE+Z0rXnoKZynVQOA7/a/w5zORwr9vh63VQOAq/h8mN1oPHKj8XAldYOyqfujU/4A4Nt9Msyp5sMn3U0SbTYL/RxUaQZwNZ8Mc0djF+Jxj5EYaIrLHAADcHWEGTCCMANGEGbACMIMGEGYASMIM2AEYQaMuECYUyX78sTs5dPaPQJwDZ8Oc3GBRRjK83z1l1Xjsi/f84r20bpqA/Atmn9Dv/yCjuFUu8FEm3GvamyffOPpr6TZ5Cen0aJWo/eZ07kb+f2pNPm31UHOdcYLJZM77ae+QjftYXcG7zV2ZM6D7D+6kSjZaMxAdMDNVLy+llGsbNHuDRzeamaY1yN5bkc8ijPRX2ukc4Xlls7NWNjSodTAMKeah74eNVOyGYuuWm898tRfRoqzhdjeIde8feb0WautFAzuCfIJvYfIfV1qyn3XUGlcmNPnlbYKNLgnyif1HpTHebtPysdovYaFOdVzPiyrq1O3E0vdPnXoefLymvabkam8L1nebr/O7esuv1vT8sn91e1DH6iR7zM3R5y50SZTMMuSquUvcZQFUeyeT7JZ4F6ryL2reCKLiseHbbbFUf63Btns6Mo64NZbuW7OWE59DtdEH6h1e2E+kMwC96GVnbno2O59cSN739c4K8xGtb0PHDo6zc6nKV+5XELnfuD2rrdaDUP1d+XR7/90clRe+qr5nU4u4ZwTNWrUrqsLLh+hD/xxNMwu6F+6XETnh9u7lvsoB+eVsXqL2t/p5EKZrFbturrg8iH6wKvmlabOkb5oV/2ID1idjdAHXjUszNUR2u1eHxZcirOgVupG7g3blZ5bNwdO9VL04tNH/l9ZnI20vg+81bAwd3Rf/HeMnV5OfTDV6YzdeKPFQznJal+5NVFxGXlw5zaBLUQf+JvbAjdLVUIJ6g7RHpZXot+Fh+oIePE4cS+J2nF099R6sow+cFTzwvy7dlhTnipLMa4DFzXGP8ryRP5ckEUtqUuU66J9tVT6wHFcNXWLuGoKNbie+eZwPTPqNbY01RlvlMykRz+/n1jLD1NW0rUbkV2Qdy7ICUHGO42uM+eBzpKJNB0qnLf7DoHFPcCmew1iN7V2QWaygvcaO80GcJ7bPgMMwKurhJk9YODymGYDRjDNBowgzIARhBkwgjADRhBmwAjCDBhBmAEjCDNgBGEGjCDMgBGEGTCCMANGEGbACMIMGEGYASMIM2AEYQaMIMyAEYQZMIIwAyZIvwBpAn1htw985wAAAABJRU5ErkJggg==";
+					a_image.onload = function () {
+						ctx.drawImage(a_image, 0, 0);
+						ctx.textAlign = "center";
+						ctx.fillStyle = "black";
+						ctx.font = "20px Calibri";
+						ctx.fillText(arr[0],18,53);
+						ctx.fillText(arr[1],93,36);
+						ctx.fillText(arr[2],155,23);
+						ctx.fillText(arr[3],155,53);
+						ctx.fillText(arr[4],225,36);
+					}
+					return 0;
+				}
+				function GetSoal18(canv){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ee = angka[4];
+						var atas = bb*dd-aa*dd*ee;
+						var bawah = dd-aa*cc;
+						var xx = atas/bawah;
+						var ft = atas%bawah!==0;
+					}while(ft)
+					
+					var Gambar = GambarPLSV18(canv,[aa,bb,cc,dd,ee]);
+					var ss = "adalah ...";
+					
+					var ar_er = [];
+					for(var i=-5;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = xx;
+					Ar[1] = Ar[0]+ar_er[0]; 
+					Ar[2] = Ar[0]+ar_er[1];
+					Ar[3] = Ar[0]+ar_er[2];
+					
+					for(var i=0;i<4;i++){
+						if(Ar[i]<0) Ar[i]="\u{2212}"+Math.abs(Ar[i]);
+					}
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal17(){
+					var angka = [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var abc = 61+2*RandomAngkaAtoB(0,42);
+						var aa = angka[0];
+						var bb = aa+2;
+						var cc = aa+4;
+						var dicari = aa+cc;
+						var ft = aa+bb+cc!==abc
+					}while(ft)
+					
+					
+					var ss = "Tiga bilangan ganjil berurutan jumlahnya "+abc+". Jumlah bilangan terbesar dan terkecil adalah ...";
+					
+					var ar_er = [];
+					for(var i=-5;i<=5;i++){
+						if(i!==0) ar_er.push(i*2);
+					}
+					
+					var Ar = [];
+					do{
+						ar_er = RandomMyArray(ar_er);
+						Ar[0] = dicari;
+						Ar[1] = dicari+ar_er[0];
+						Ar[2] = dicari+ar_er[1];
+						Ar[3] = dicari+ar_er[2];
+						var ft = Ar[1]<=0 || Ar[2]<=0 || Ar[3]<=0;
+					}while(ft)
+					
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal16(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var bd = bb+dd;
+						var ac = aa-cc;
+						var xx = bd/ac;
+						var ft1 = bd <= 0;
+						var ft2 = ac <= 0;
+						var ft3 = bd%ac !==0
+						var ft4 = xx>=10 || xx<=1
+						var ft = ft1 || ft2 || ft3 || ft4;
+					}while(ft);
+					
+					var ss = "Himpunan penyelesaian pertidaksamaan "+aa+"x \u{2212} "+bb+" \u{2264} "+cc+"x + "+dd+" dengan x bilangan cacah adalah ...";
+					
+					
+					function DeretAsli(n){
+						var str = "{"; 
+						for(var i=1;i<=n;i++){
+							if(i==1)	str+=i;
+							else		str+=", "+i;
+						}
+						str+="}";
+						return str;
+					}
+					
+					function DeretCacah(n){
+						var str = "{"; 
+						for(var i=0;i<=n;i++){
+							if(i==0)	str+=i;
+							else		str+=", "+i;
+						}
+						str+="}";
+						return str;
+					}
+					var ar_er = [];
+					for(var i=0;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = DeretCacah(xx);
+					Ar[1] = DeretCacah(xx+ar_er[0]);
+					Ar[2] = DeretAsli(xx);
+					Ar[3] = DeretAsli(xx+ar_er[0]);
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+" </p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal15(){
+					var angka = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var abc = 60+2*RandomAngkaAtoB(0,42);
+						var aa = angka[0];
+						var bb = aa+2;
+						var cc = aa+4;
+						var dicari = aa+cc;
+						var ft = aa+bb+cc!==abc
+					}while(ft)
+					
+					//console.log(aa,cc)
+					
+					var ss = "Tiga bilangan genap berurutan jumlahnya "+abc+". Jumlah bilangan terbesar dan terkecil adalah ...";
+					
+					var ar_er = [];
+					for(var i=-5;i<=5;i++){
+						if(i!==0) ar_er.push(i*2);
+					}
+					
+					var Ar = [];
+					do{
+						ar_er = RandomMyArray(ar_er);
+						Ar[0] = dicari;
+						Ar[1] = dicari+ar_er[0];
+						Ar[2] = dicari+ar_er[1];
+						Ar[3] = dicari+ar_er[2];
+						var ft = Ar[1]<=0 || Ar[2]<=0 || Ar[3]<=0;
+					}while(ft)
+					
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal14(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ee = RandomAngkaAtoB(20,60);
+						var atas = aa+bb;
+						var bawah = cc+1;
+						var xx = atas/bawah;
+						var ft = atas%bawah!==0
+					}while(ft)
+					
+					var hasil = aa+"\u{221A}"+bb;
+					
+					var ss = "Himpunan penyelesaian dari pertidaksamaan x \u{2212} "+aa+" \u{2264} "+bb+" − "+cc+"x, dengan x bilangan bulat adalah ...";
+					
+					var ar_er = [];
+					for(var i=-5;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					ar_er = RandomMyArray(ar_er);
+					
+					var Ar = [];
+					Ar[0] = "{x|x \u{2264} "+(xx)+", x bilangan bulat}";
+					do{
+						ar_er = RandomMyArray(ar_er);
+						Ar[1] = "{x|x \u{2264} "+(xx+ar_er[0])+", x bilangan bulat}";
+						Ar[2] = "{x|x \u{2265} "+(xx)+", x bilangan bulat}";
+						Ar[3] = "{x|x \u{2265} "+(xx+ar_er[0])+", x bilangan bulat}";
+						var ft = (xx+ar_er[0])<=0;
+					}while(ft)
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal13(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ee = RandomAngkaAtoB(20,60);
+						var atas = ee-2*bb-2*dd;
+						var bawah = 2*aa+2*cc;
+						var xx = atas/bawah;
+						var ft = atas%bawah!==0
+						var pjg = aa*xx+bb;
+						var lbr = cc*xx+dd;
+					}while(ft)
+					
+					var hasil = aa+"\u{221A}"+bb;
+					
+					var ss = "Diketahui keliling persegipanjang "+ee+" cm dengan ukuran panjang ("+aa+"x + "+bb+") cm dan lebar ("+cc+"x + "+dd+") cm, ";
+					ss += "maka panjang dan lebar persegipanjang berturut-turut adalah ...";
+					
+					var ar_er = [];
+					for(var i=-5;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					ar_er = RandomMyArray(ar_er);
+					
+					var Ar = [];
+					Ar[0] = pjg+" cm dan "+lbr+" cm";
+					do{
+						ar_er = RandomMyArray(ar_er);
+						Ar[1] = (pjg+ar_er[0])+" cm dan "+(lbr)+" cm";
+						Ar[2] = (pjg+ar_er[1])+" cm dan "+(lbr+ar_er[3])+" cm";
+						Ar[3] = (pjg+ar_er[2])+" cm dan "+(lbr+ar_er[4])+" cm";
+						var ft1 = (pjg+ar_er[0])<=0 || (pjg+ar_er[1])<=0 || (pjg+ar_er[2])<=0;
+						var ft2 = (lbr+ar_er[3])<=0 || (lbr+ar_er[4])<=0;
+						var ft = ft1 || ft2;
+					}while(ft)
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal12(){
+					var angka = [2,3,4,5,6,7,8,9,10];
+					var angka2 = [40,41,42,43,44,45,46,47,48,49,50];
+					
+					angka = RandomMyArray(angka);
+					angka2 = RandomMyArray(angka2);
+					var aa = angka[0];
+					var bb = angka2[0];
+					
+					var ss = "Umur ayah p tahun dan ayah "+aa+" tahun lebih tua dari paman. ";
+					ss += "Jika jumlah umur paman dan ayah "+bb+" tahun, ";
+					ss += "maka model matematika yang tepat adalah ...";
+					
+					var ar_er = [];
+					for(var i=-15;i<=15;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					do{
+						ar_er = RandomMyArray(ar_er);
+						Ar[0] = (2)+"p \u{2212} "+aa+" = "+bb;
+						Ar[1] = (2+ar_er[0])+"p \u{2212} "+aa+" = "+bb; 
+						if((2+ar_er[0])<0)	Ar[1] = "\u{2212}"+Math.abs(2+ar_er[0])+"p \u{2212} "+aa+" = "+bb;
+						Ar[2] = (2)+"p \u{2212} "+aa+" = "+(bb+ar_er[0]);
+						Ar[3] = (2+ar_er[0])+"p \u{2212} "+aa+" = "+(bb+ar_er[0]);
+						if((2+ar_er[0])<0)	Ar[3] = "\u{2212}"+Math.abs(2+ar_er[0])+"p \u{2212} "+aa+" = "+(bb+ar_er[0]);
+					}while(Math.abs(2+ar_er[0])<=1)
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+" </p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal11(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var cb = cc+bb;
+						var da = dd-aa;
+						var ft1 = cb <= 0;
+						var ft2 = da <= 0;
+						var ft3 = cb%da !==0
+						var ft = ft1 || ft2 || ft3;
+						var xx = -cb/da;
+					}while(ft);
+					
+					var ss = "Himpunan penyelesaian dari "+aa+"x \u{2212} "+bb+" \u{2264} "+cc+" + "+dd+"x dengan x bilangan bulat adalah ...";
+					
+					
+					function DeretKanan(n){
+						var str = "{"; 
+						for(var i=0;i<4;i++){
+							var nn = n+i;
+							if(nn<0) nn = "\u{2212}"+Math.abs(nn);
+							if(i==0)	str+=nn;
+							else		str+=", "+nn;
+						}
+						str+=", ...}";
+						return str;
+					}
+					
+					function DeretKiri(n){
+						var str = "{..., "; 
+						for(var i=0;i<4;i++){
+							var nn = n+i-3;
+							if(nn<0) nn = "\u{2212}"+Math.abs(nn);
+							if(i==0)	str+=nn;
+							else		str+=", "+nn;
+						}
+						str+="}";
+						return str;
+					}
+					var ar_er = [];
+					for(var i=-15;i<=15;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = DeretKanan(xx);
+					Ar[1] = DeretKanan(xx+ar_er[0]);
+					Ar[2] = DeretKiri(xx);
+					Ar[3] = DeretKiri(xx+ar_er[0]);
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+" </p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal10(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var db = dd-bb;
+						var ac = aa-cc;
+						var ft1 = db <= 0;
+						var ft2 = ac <= 0;
+						var ft3 = db%ac !==0
+						var ft = ft1 || ft2 || ft3;
+						var xx = db/ac;
+						var dia = aa*xx+bb;
+					}while(ft);
+					
+					var ss = "Kebun sayur Pak Jaga berbentuk persegi dengan panjang diagonal ("+aa+"x + "+bb+") dan ("+cc+"x + "+dd+") meter. ";
+					ss += "Panjang diagonal kebun sayur tersebut adalah ...";
+					
+					var ar_er = [];
+					for(var i=-15;i<=15;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					do{
+						ar_er = RandomMyArray(ar_er);
+						Ar[0] = dia;
+						Ar[1] = dia+ar_er[0];
+						Ar[2] = dia+ar_er[1];
+						Ar[3] = dia+ar_er[2];
+						var ft = Ar[1]<=0 || Ar[2]<=0 || Ar[3]<=0;
+					}while(ft)
+					
+					for(var i=0;i<4;i++){
+						if(Ar[i]<0) Ar[i]="\u{2212}"+Math.abs(Ar[i]);
+					}
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" meter<br>B. "+Ar[1]+" meter<br>C. "+Ar[2]+" meter<br>D. "+Ar[3]+" meter</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal9(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ab6 = 6*aa+bb;
+						var ac10 = 10*(aa+cc)
+						var ft = dd-bb !== aa+cc
+					}while(ft);
+					
+					var ss = "Perhatikan persamaan berikut!<br>";
+					ss += "Taman bunga berbentuk persegi panjang dengan ukuran panjang ("+aa+"x + "+bb+") meter dan ukuran lebarnya ("+cc+"x \u{2212} "+dd+") meter. <br>";
+					ss += "Jika keliling taman tidak kurang dari "+ac10+" meter, maka panjang taman tersebut (p) adalah ...<br>";
+					
+					var ar_er = [];
+					for(var i=-15;i<=15;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = "p \u{2265} "+ab6;
+					Ar[1] = "p \u{2265} "+(ab6+ar_er[0]);
+					Ar[2] = "p > "+ab6;
+					Ar[3] = "p > "+(ab6+ar_er[0]);
+					
+					for(var i=0;i<4;i++){
+						if(Ar[i]<0) Ar[i]="\u{2212}"+Math.abs(Ar[i]);
+					}
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GambarPLSV8(nmcanvas,arr){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					let a_image = new Image();
+					a_image.src = "data:image/png;base64,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";
+					a_image.onload = function () {
+						ctx.drawImage(a_image, 0, 0);
+						ctx.fillStyle = "black";
+						ctx.font = "16px Calibri";
+						ctx.textAlign = "right";
+						ctx.fillText(arr[0],73,17);
+						ctx.textAlign = "left";
+						ctx.fillText(arr[1],108,17);
+						ctx.textAlign = "right";
+						ctx.fillText(arr[2],73,48);
+						ctx.textAlign = "left";
+						ctx.fillText(arr[3],108,48);
+					}
+					return 0;
+				}
+				function GetSoal8(canv){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ft = aa%cc!==0;
+						var jwb = aa/cc;
+					}while(ft)
+					
+					var Gambar = GambarPLSV8(canv,[aa,bb,cc,dd]);
+					var ss = "";
+					
+					var ar_er = [];
+					for(var i=-0;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = jwb;
+					Ar[1] = jwb+ar_er[0];
+					Ar[2] = jwb+ar_er[1];
+					Ar[3] = jwb+ar_er[2];
+					
+					for(var i=0;i<4;i++){
+						if(Ar[i]<0)	Ar[i] = "\u{2212}"+Ar[i]
+					}
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GambarJawabPLSV7(nmcanvas,arrs){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					// menambahkan image pada canvas //
+					let base1_image = new Image();
+					let base2_image = new Image();
+					base1_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAoCAYAAADg+OpoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABRSURBVFhH7dWxCoAwDADR1C3//7EZtWAW1ytVkHtLsx2FQMY5xQuOfrczhBnCDGGGMEPY/0KPU56ZPa2rqp5u3/xoJ7cOM4QZwgxhhjBDUMQFCWQPQhUyb4oAAAAASUVORK5CYII=";
+					base2_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABcSURBVFhH7dYxCgAxCABBk87/P9bycoU/2AsIt9PEcgkIrucVg+1+xzKQMpAykDKQMpAykDKQMpAaH/jZyZ+ZPXFV1dOffvAWl4QykDKQMpAykDKQMpAykDKQiTg6UA9CJ+HaOAAAAABJRU5ErkJggg==";
+					base1_image.onload = function () {
+						CekJaw();
+					}
+					base2_image.onload = function () {
+						CekJaw();
+					}
+					var inside=0;
+					function CekJaw(){
+						inside++;
+						if(inside==2){
+							for(var i=0;i<4;i++){
+								var Abjad = ["A","B","C","D"];
+								ctx.font = "16px Times New Roman";
+								ctx.textAlign = "center";
+								if(arrs[i][0]!=="" && arrs[i][1]==""){
+									ctx.fillText(arrs[i][0],30,22+40*i);
+								}else{
+									if(arrs[i][0]==""){
+										ctx.drawImage(base1_image, 30, -3+40*i,base1_image.width, base1_image.height);
+										ctx.fillText(arrs[i][1],43,12+40*i);
+										ctx.fillText(arrs[i][2],43,32+40*i);
+									}else{
+										ctx.drawImage(base2_image, 20+5, -3+40*i,base2_image.width, base2_image.height);
+										ctx.fillText(arrs[i][0],30,22+40*i);
+										ctx.fillText(arrs[i][1],47+5,12+40*i);
+										ctx.fillText(arrs[i][2],47+5,32+40*i);
+									}
+								}
+								ctx.textAlign = "left";
+								ctx.fillText(Abjad[i]+".",0,22+40*i);
+							}
+						}
+					}
+					
+					return 0;
+				}
+				function GambarPLSV7(nmcanvas,arr){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					let a_image = new Image();
+					a_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJwAAABBCAYAAAAkGM28AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJzSURBVHhe7dw/ctpAFIDxp5wFp+IE0glwGlVu3aHSbnwKN1BCl9YVTdAJ4ASZFJbusn4rKxky8QQ0hrfL6vvNMDJ/ZhjGH7uSgM2cEsDIl34LmCA4mCI4mCI4mCI4mCI4mCI4mCI4mCI4mEo+uHZZSJZVUvfXEdaR4Np+C5zHkeCafgucx5Hgbvrt+R2OnW1dSZFlOvVlUiwP76mlKt5vr5gTo3bqXHgkuEm/vSCN7X5TynfXyCIX2T8+9/tbPrZbWe/933MpZ92NuHLBDhr+pDxbyW410+sT+XanxclPedW3S11pbLKQbePEuZXQW9xOHpr89+Gi0SycJufyPHeSL1zT33yS7dx/r2/YZehz4NOCjXAfmnyVqW72cifN7mHYhK4jpb6efy6Nn6d1St5+cJ8b+hz4tLiCa191QkXK4gmuXUpx8yLTuT9yeJEfnAJMUhzBdbE9ynS7k1X5Pqn+4hRgksIGV1fdObZMY9vPt6IHq7ovVuoel8h640+OtPqQSv46NYerFjS4erPutrnG1nS1eTN58jv661uN8V425ZM8sGefDH4mCFNxHaUieQQHUwQHUwQHUwQHUwQHUwQHUwQXo9+fwAy5FMur+AUKJ35h6r/B+XcOLiPE+/zS/89TXhMjHEyxDxcj9uGA82CEgymCgymCgymCgymCg6nkg2N9uLgwwsEUwcFUsOAOz4qzPtx4hB/hWB9uVIIFx/pwI+U/S40G68MlL66DBtaHS15cwbE+XPLiCY714UYhjuBYH240wgbH+nCjEzQ41ocbH75iDlNxHaUieQQHUwQHUwQHUwQHUwQHUwQHUwQHUwQHQyJvk3mJ0Yjcoy8AAAAASUVORK5CYII=";
+					a_image.onload = function () {
+						ctx.drawImage(a_image, 0, 0);
+						ctx.textAlign = "center";
+						ctx.fillStyle = "black";
+						ctx.font = "20px Calibri";
+						ctx.fillText(arr[0],20,23);
+						ctx.fillText(arr[1],80,23);
+						ctx.fillText(arr[2],20,55);
+						ctx.fillText(arr[3],80,55);
+						ctx.fillText(arr[4],135,23);
+						ctx.fillText(arr[5],135,55);
+					}
+					return 0;
+				}
+				function GetSoal7(canv1,canv2){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					angka = RandomMyArray(angka);
+					var aa = angka[0];
+					var bb = angka[1];
+					var cc = angka[2];
+					var dd = angka[3];
+					var ee = angka[4];
+					var ff = angka[5];
+					var atas = dd*ee-bb*ff;
+					var bawah = aa*ff-cc*ee;
+					var fpb = CariFPB([Math.abs(atas),Math.abs(bawah)])
+					var atas = atas/fpb;
+					var bawah = bawah/fpb;
+					var Gambar = GambarPLSV7(canv1,[aa,bb,cc,dd,ee,ff]);
+					var ss = "adalah ...";
+					
+					
+					var ar_er = [];
+					for(var i=-10;i<=10;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					ar_er = RandomMyArray(ar_er);
+					
+					var Ar = [];
+					if(atas*bawah>0){
+						Ar[0] = ["",Math.abs(atas),Math.abs(bawah)];
+						Ar[1] = ["",Math.abs(atas+ar_er[0]),Math.abs(bawah)];
+						Ar[2] = ["\u{2212}",Math.abs(atas+ar_er[1]),Math.abs(bawah)];
+						Ar[3] = ["\u{2212}",Math.abs(atas+ar_er[2]),Math.abs(bawah)];
+					}else{
+						Ar[0] = ["\u{2212}",Math.abs(atas),Math.abs(bawah)];
+						Ar[1] = ["\u{2212}",Math.abs(atas+ar_er[0]),Math.abs(bawah)];
+						Ar[2] = ["",Math.abs(atas+ar_er[1]),Math.abs(bawah)];
+						Ar[3] = ["",Math.abs(atas+ar_er[2]),Math.abs(bawah)];
+					}
+					
+					for(var i=0;i<=3;i++){
+						fpb = CariFPB([Ar[i][1],Ar[i][2]]);
+						if(Ar[i][0]=="\u{2212}"){
+							if(fpb == Ar[i][2])		Ar[i] = ["\u{2212}"+Ar[i][1]/fpb,"",""];
+							else					Ar[i] = ["\u{2212}",Ar[i][1]/fpb,Ar[i][2]/fpb];
+						}else{
+							if(fpb == Ar[i][2])		Ar[i] = [Ar[i][1]/fpb,"",""];
+							else					Ar[i] = ["",Ar[i][1]/fpb,Ar[i][2]/fpb];
+						}
+					}
+					
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					
+					var GambarJawab = GambarJawabPLSV7(canv2,Ar)
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal6(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var cc = angka[2];
+						var cb = bb-aa;
+						var da = cc+aa;
+						var ft1 = bb < aa;
+						var ft2 = cc < bb;
+						var ft = ft1 || ft2;
+					}while(ft);
+					//console.log(atas);
+					//console.log(bawah);
+					//console.log(xx);
+					
+					var ss = "Jika \u{2212}"+aa+" < x < "+aa+" dan "+bb+" < y < "+cc+" manakah diantara pernyataan di bawah ini yang menunjukkan jangkauan dari semua nilai untuk y \u{2212} x?";
+					
+					var ar_er = [];
+					for(var i=-5;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = cb + " < y \u{2212} x < " + da;
+					Ar[1] = (cb+ar_er[0]) + " < y \u{2212} x < " + (da+ar_er[1]);
+					if(cb+ar_er[0]<0)	Ar[1] = "\u{2212}"+Math.abs(cb+ar_er[0]) + " < y \u{2212} x < " + (da+ar_er[1]);
+					
+					Ar[2] = (cb+ar_er[2]) + " < y \u{2212} x < " + (da+ar_er[3]);
+					if(cb+ar_er[2]<0)	Ar[2] = "\u{2212}"+Math.abs(cb+ar_er[2]) + " < y \u{2212} x < " + (da+ar_er[3]);
+					
+					Ar[3] = (cb+ar_er[4]) + " < y \u{2212} x < " + (da+ar_er[5]);
+					if(cb+ar_er[4]<0)	Ar[3] = "\u{2212}"+Math.abs(cb+ar_er[4]) + " < y \u{2212} x < " + (da+ar_er[5]);
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GambarPLSV5(nmcanvas,arr){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					let a_image = new Image();
+					a_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAR8AAABDCAYAAAClbAF1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAUpSURBVHhe7d0xcoJaFMbxw1uLpshkBbICTWNlS4eladKlTJcGS9PZWtkEV6AryFgIe+HdCyQx76kBRA/q/zfDJJLMJODh4164F53EEAA4s3/yrwBwVoQPABWEDwAVhA8AFYQPABWEDwAVhA8AFfWGT7yQseuIO47zFQCwW23hE4+H4rZ78rTKVwDAAceHj2ntDE1rx5uJPHSyVQ93rewbANjjyPCJZezN5f4lkuVyIs+DPH0A4A9Hhk9LRiZ0Rl1aOgDKqfeCMwAURPgAUEH4AFBB+ABQQfgAUEH4AFBB+ABQQfgAUFFj+MQSrbOJXe/zhXkFAPsdHT7phFLXFcdpS+89X/nek7bjpOuHi3wdAGw5Onxao4ksl0uxn8Dz38Wun3TzXzxWOoHVFXdMmp2SPZk47lDGC9quO1GHqVrqxIRE40VBJxHpJH4Y5WtwSlEYJH5Hko4fJuzxH9Thb8fWSePD5+sND3i/zyxMfHNuElNYoA73q14nzQ6f0LefpmrONPlrnFcUJB2z/zu3fsRRh4dVrJMGh0+UBKZJJ52Apr+i0Dfvgfjm/FaCbY4H19Jlow6LqFInzR3nE3/IbGUauoNH4WlBerp906iWd3kt81zu7qP0ZS5eesdzKIv4gi9eU4eFVKmTxoZP/DGTlXRk8MhbrqrbF1tWq3WUvS6kJV17F9S0rKfTvmzePHEcV9zhQi4th6jDgirUSUPDJ5YPe7qRB9F8HHS8GIprzt6OPYP/SvTsudV2/TWNY9qdC225t0/HfZ+brS6v1erKaGKHYkxl2t/Im2f2Wzr+K76AgajF6vDW6mS3CnWSd78aJr+CrtnPDv38FmLe5//uz5r/LX1dvo/bdPv2ddafr/FOTxQlYWD2r71I6QdJaF43U4E6vME62adsnTT3mo+2ruk2TLqmA9GSx/TB+J+yMSe1xbBneraBhJG9WD+RusZQNsHZGpmtrW7Z/Vpe223TGhpf5pScG6yTuvwZPrbJeMrlErQeB6bXv5KZ50rvM5BoOZLCz8w3TfJd231wudQDsag4loWdlmO21Vvfy0sUSWL26aFdunM/1bjUoXKd3GiN/Bk+pnV00uUitO5Mr19MWQ3SgirVQjBnxl3bfXAp+zcuQizxYpxdA/HeZHP3LFOzrcuJPUD/3tqd+6nGpRZV6+RGa4RuVxHxxjSmUUVsP0J7aCcee+LN7+R5ag+c7OOWri5gqZNSGho++ZXz1VrK3OA9iXgsbnsmD775h1Yz+bjq/tAusWzSI6rMncetbpU3l7vnqTlbL7NrIxeVOCXqkDopXScNDZ/fF+/UpAX1JA/hUib9rEFdarjLVYgkfUxT594cigUtPmT+1a0yrZwi3apmKliH1IlRoU5M/7GZ8vk0KvOK8r+dLt8TerYn0EXmV/zbmGSo+T40waHtp05+VKiT5obP17gJhbE+2XgFOwbl9/ykbGaz/dntPFah2tyurYOy6NLYuVP765A6+VGlThocPkZexN8nFZwXs9oz1OFh1zerPcNzVLRsdx9AHe5TvU4af6u9NVpKFIg8tbP5QDg9Ox7HdXry6YcS1fYc3MtGHf7fsXVyEeN87BufRC8irx7PcD4x+2ze9utaBmGUTxvAF+rwRx114tjmT/49AJwNI5wBqCB8AKggfACoIHwAqCB8AKggfACoIHwAqCB8AKggfACoIHwAqCB8AKggfACoIHwAqCB8AKggfACoIHwAqCB8AKggfACoIHwAqCB8AKggfACoIHwAKBD5F6h7WRlKEMxbAAAAAElFTkSuQmCC";
+					a_image.onload = function () {
+						ctx.drawImage(a_image, 0, 0);
+						ctx.textAlign = "center";
+						ctx.fillStyle = "black";
+						ctx.font = "16px Calibri";
+						ctx.fillText(arr[0],20,50);
+						ctx.fillText(arr[1],57,39);
+						ctx.fillText(arr[2],120,39);
+						ctx.fillText(arr[3],180,27);
+						ctx.fillText(arr[4],180,50);
+						ctx.fillText(arr[5],260,39);
+					}
+					return 0;
+				}
+				function GetSoal5(canv){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ee = angka[4];
+						var ff = angka[5];
+						var atas = bb*cc-aa*aa*dd;
+						var bawah = aa*cc-aa*aa;
+						var xx = atas/bawah;
+						var ft1 = atas%bawah!==0;
+						var ft2 = xx==0;
+						var ft = ft1 || ft2;
+					}while(ft)
+					
+					var Gambar = GambarPLSV5(canv,[aa,aa,bb,aa,cc,dd]);
+					var ss = "adalah ...";
+					
+					var ar_er = [];
+					for(var i=-0;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					if(xx>0){
+						Ar[0] = "x \u{2265} "+xx;
+						Ar[1] = "x \u{2265} "+(xx+ar_er[0]);
+						Ar[2] = "x \u{2265} \u{2212}"+(xx+ar_er[1]);
+						Ar[3] = "x \u{2265} \u{2212}"+(xx+ar_er[2]);
+					}else{
+						Ar[0] = "x \u{2265} \u{2212}"+Math.abs(xx);
+						Ar[1] = "x \u{2265} \u{2212}"+(Math.abs(xx)+ar_er[0]);
+						Ar[2] = "x \u{2265} "+(Math.abs(xx)+ar_er[1]);
+						Ar[3] = "x \u{2265} "+(Math.abs(xx)+ar_er[2]); 
+					}
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GambarPLSV4(nmcanvas,arr){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					let a_image = new Image();
+					a_image.src = "data:image/png;base64,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";
+					a_image.onload = function () {
+						ctx.drawImage(a_image, 0, 0);
+						ctx.textAlign = "center";
+						ctx.fillStyle = "black";
+						ctx.font = "16px Calibri";
+						ctx.fillText(arr[0],75,27);
+						ctx.fillText(arr[1],70,59);
+						ctx.fillText(arr[2],200,27);
+						ctx.fillText(arr[3],265,27);
+						ctx.fillText(arr[4],225,59);
+					}
+					return 0;
+				}
+				function GetSoal4(canv){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					angka = RandomMyArray(angka);
+					var aa = angka[0];
+					var bb = angka[1];
+					var cc = angka[2];
+					var dd = angka[3];
+					var ee = angka[4];
+					var a2 = aa*aa;
+					var bpc = bb+cc;
+					var bkc = bb*cc;
+					var kiri = dd+aa;
+					var kanan = ee-cc;
+					var xx = kiri*kanan;
+					
+					var Gambar = GambarPLSV4(canv,[a2,aa,bpc,bkc,bb]);
+					var ss = "Jika x = "+dd+" dan y = "+ee+", maka hasilnya adalah ...";
+					
+					var ar_er = [];
+					for(var i=-5;i<=5;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = xx;
+					Ar[1] = Ar[0]+ar_er[0]; 
+					Ar[2] = Ar[0]+ar_er[1];
+					Ar[3] = Ar[0]+ar_er[2];
+					
+					for(var i=0;i<4;i++){
+						if(Ar[i]<0) Ar[i]="\u{2212}"+Math.abs(Ar[i]);
+					}
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal3(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = 10*angka[2];
+						var atas = bb+cc;
+						var bawah = aa+1;
+						var xx = Math.round(atas/bawah);
+						var ft1 = atas%bawah !== 0;
+						var ft2 = cc<=10;
+						var ft3 = xx<=10;
+						var ft = ft1 || ft2 || ft3;
+					}while(ft);
+					//console.log(atas);
+					//console.log(bawah);
+					//console.log(xx);
+					
+					var ss = "Diketahui taman berbentuk persegipanjang yang panjangnya ("+aa+"x \u{2212} "+bb+") cm dan lebar x cm. <br>";
+					ss+="Jika kelilingnya tidak lebih dari "+cc+" cm, lebar taman (<i>l</i>) adalah ...";
+					
+					var ar_er = [];
+					for(var i=0;i<=8;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = 0 +" < <i>l</i> \u{2264} "+xx;
+					Ar[1] = ar_er[0] +" < <i>l</i> \u{2264} "+xx;
+					Ar[2] = ar_er[1] +" < <i>l</i> \u{2264} "+xx;
+					Ar[3] = ar_er[2] +" < <i>l</i> \u{2264} "+xx;
+					
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GetSoal2(){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ee = angka[4];
+						var ff = angka[5];
+						var gg = angka[6];
+						var hh = angka[7];
+						var ii = angka[8];
+						var jj = angka[9];
+						var atas = aa*cc-dd+ee*gg+hh;
+						var bawah = aa*bb-ee*ff;
+						var xx = Math.round(atas/bawah);
+						var sum = ii*xx + jj;
+						var ft1 = atas%bawah !== 0;
+						var ft2 = Math.abs(xx)>=100;
+						var ft = ft1 || ft2;
+					}while(ft);
+					//console.log(atas);
+					//console.log(bawah);
+					//console.log(xx);
+					
+					var ss = "Perhatikan persamaan berikut!<br>";
+					ss += ""+aa+"("+bb+"x–"+cc+") + "+dd+" = "+ee+"("+ff+"x + "+gg+") – (−"+hh+") mempunyai penyelesaian n. <br>";
+					ss += "Nilai dari "+ii+"n + "+jj+" adalah ...";
+					
+					var ar_er = [];
+					for(var i=-15;i<=15;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					
+					var Ar = [];
+					ar_er = RandomMyArray(ar_er);
+					Ar[0] = sum;
+					Ar[1] = Ar[0]+ar_er[0]; 
+					Ar[2] = Ar[0]+ar_er[1];
+					Ar[3] = Ar[0]+ar_er[2];
+					
+					for(var i=0;i<4;i++){
+						if(Ar[i]<0) Ar[i]="\u{2212}"+Math.abs(Ar[i]);
+					}
+					var jawab = Ar[0];
+					Ar = RandomMyArray(Ar);
+					
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+" <p>A. "+Ar[0]+" <br>B. "+Ar[1]+" <br>C. "+Ar[2]+" <br>D. "+Ar[3]+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+				function GambarJawabPLSV2(nmcanvas,arrs){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					// menambahkan image pada canvas //
+					let base1_image = new Image();
+					let base2_image = new Image();
+					base1_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAoCAYAAADg+OpoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABRSURBVFhH7dWxCoAwDADR1C3//7EZtWAW1ytVkHtLsx2FQMY5xQuOfrczhBnCDGGGMEPY/0KPU56ZPa2rqp5u3/xoJ7cOM4QZwgxhhjBDUMQFCWQPQhUyb4oAAAAASUVORK5CYII=";
+					base2_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABcSURBVFhH7dYxCgAxCABBk87/P9bycoU/2AsIt9PEcgkIrucVg+1+xzKQMpAykDKQMpAykDKQMpAaH/jZyZ+ZPXFV1dOffvAWl4QykDKQMpAykDKQMpAykDKQiTg6UA9CJ+HaOAAAAABJRU5ErkJggg==";
+					base1_image.onload = function () {
+						CekJaw();
+					}
+					base2_image.onload = function () {
+						CekJaw();
+					}
+					var inside=0;
+					function CekJaw(){
+						inside++;
+						if(inside==2){
+							for(var i=0;i<4;i++){
+								var Abjad = ["A","B","C","D"];
+								ctx.font = "16px Times New Roman";
+								ctx.textAlign = "center";
+								
+								if(arrs[i][0]!=="" && arrs[i][1]==""){
+									ctx.fillText(arrs[i][0],30,22+40*i);
+								}else{
+									if(arrs[i][0]==""){
+										ctx.drawImage(base1_image, 30, -3+40*i,base1_image.width, base1_image.height);
+										ctx.fillText(arrs[i][1],43,12+40*i);
+										ctx.fillText(arrs[i][2],43,32+40*i);
+									}else{
+										ctx.drawImage(base2_image, 20+5, -3+40*i,base2_image.width, base2_image.height);
+										ctx.fillText(arrs[i][0],30,22+40*i);
+										ctx.fillText(arrs[i][1],47+5,12+40*i);
+										ctx.fillText(arrs[i][2],47+5,32+40*i);
+									}
+								}
+								ctx.textAlign = "left";
+								ctx.fillText(Abjad[i]+".",0,22+40*i);
+							}
+						}
+					}
+					
+					return 0;
+				}
+				function GambarPLSV1(nmcanvas,arr){
+					const canvas = document.getElementById(nmcanvas);
+					const ctx = canvas.getContext("2d");
+					let a_image = new Image();
+					a_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATsAAABICAYAAACJHVIcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAM9SURBVHhe7d0xcuJIFAbgpz3LMMEWJxAnMJGjTZ1BaCeTzQ0mgRBnkzpysvgE+ARTEyzchZVAG8wWOwZ2sCTe91WpJLpsmaLVv9TqRi62lQC4cr81a4CrJuyAFIQdkIKwA1IQdkAKwg5IQdgBKQg7IAVhB6Qg7IAUrivsNi8xHxUxmm+aAqCTWmirVxN2m/k0RoNxPLw2BUAntdVW+x921RliWp0h7p4ihuW+aPjxw34D6I6W22rPw24T87vn+P3zOlarRXz6o/kEgY5pv632POw+xH31wd3fuJKDbmu/rV7XAAXAfxB2QArCDkhB2AEpCDsgBWEHpCDsgBSEHZDCFYXdJtbf91+2e3x+qV4B3dROW+192O2+VDwaRVEMYvzYFD6OY1AUu/LpS1MGtKrttlpsK802wNVyzw5IQdgBKQg7IAVh1xGbeX3jdhrGU+AyhB1XwmQjfk7YcSXWzRoOayXs+nwO3rxMY1QUVZfz3/8Zaf98/brc3L42DJr1Zan//nJld4rqQL97vo2v23XMyojXhy/NPbb6QB/H425S+CRub3aFHFJ9hnUgnLSM5kecIN/hcd/qv9dMKj5TPaAweIiYrVfx8UsR42+zWH69j3Mfsb/f3zCW20VoK933q+ufd1CHXRfUb6VLy5vWs211ct+WZbmNcrZdN8VvWk4O/r2fLm/s/+DvtLik0KH6f28H32OLy7Fc2Z2t6roUVdelnMV6df+/O1Gu7Prm19Y/l+ee3bk2f8W3ZpMTXOye3TtT/70j7M6xmcdo8BTDSX2X+in+7PPw8nu7WdT9jtOWrl05qf9eEnan2h3oDzFcrmJxO6wKXuO7KV55qP/eEnbH+qf7VR3or5NlLOobaze3MalW9QMIq1ZQ/cg0fph6xfVQ//1XdRM4wnKyH/kpJ8sfRsbWs7IZFSq3k+X5Y2b7/Uy2y+Y13XLp+ufyjMYCKejGAikIOyAFYQekIOyAFIQdkIKwA1IQdkAKwo7jbebNBvSPScVACq7sgBSEHZCCsANSEHZACsIOSEHYASkIOyAFYQekIOyAFIQdkIKwA1IQdkAKwg5IQdgBKQg7IAVhB6Qg7IAUhB2QgrADEoj4Gy7dH3y/xFk4AAAAAElFTkSuQmCC";
+					a_image.onload = function () {
+						ctx.drawImage(a_image, 0, 0);
+						ctx.textAlign = "center";
+						ctx.fillStyle = "black";
+						ctx.font = "20px Calibri";
+						ctx.fillText(arr[0],20,42);
+						ctx.fillText(arr[1],50,57);
+						ctx.fillText(arr[2],130,25);
+						ctx.fillText(arr[3],130,57);
+						ctx.fillText(arr[0],190,42);
+						ctx.fillText(arr[4],250,42);
+						ctx.fillText(arr[1],285,57);
+					}
+					return 0;
+				}
+				function GetSoal1(canv1,canv2){
+					var angka = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					
+					do{
+						angka = RandomMyArray(angka);
+						var aa = angka[0];
+						var bb = angka[1];
+						var cc = angka[2];
+						var dd = angka[3];
+						var ee = angka[4];
+						var ff = angka[5];
+						var atas = -bb*cc-bb*dd*ee-dd;
+						var bawah = dd;
+						var atas2 = atas+dd*ff;
+						var bawah2 = bawah;
+						var fpb = CariFPB([atas2,bawah2]);
+						atas2 = atas2/fpb;
+						bawah2 = bawah2/fpb;
+						var ft1 = atas%bawah == 0;
+						var ft2 = Math.abs(atas)>99;
+						var ft3 = cc > dd;
+						var ft = ft1 || ft2 || ft3;
+					}while(ft);
+					var Gambar = GambarPLSV1(canv1,[aa,bb,cc,dd,ee,ff]);
+					var ss = "Nilai n + "+ff+" adalah ...";
+					
+					var ar_er = [];
+					for(var i=-10;i<=10;i++){
+						if(i!==0) ar_er.push(i);
+					}
+					ar_er = RandomMyArray(ar_er);
+					
+					var Ar = [];
+					Ar[0] = ["\u{2212}",Math.abs(atas2),bawah2];
+					Ar[1] = ["\u{2212}",Math.abs(atas2+ar_er[0]),bawah2];
+					Ar[2] = ["",Math.abs(atas2+ar_er[1]),bawah2];
+					Ar[3] = ["",Math.abs(atas2+ar_er[2]),bawah2];
+					
+					var jawab = Ar[0];
+					
+					Ar = RandomMyArray(Ar);
+					
+					var GambarJawab = GambarJawabPLSV2(canv2,Ar)
+					var noBenar = NoJawabanBenar(Ar, jawab);
+					var textSoal = ss+"</p>";
+					
+					var ArFix = [];
+					ArFix.push(textSoal);
+					ArFix.push(GetABCD(noBenar));
+					
+					return ArFix;
+				}
+
+				var namefunc = [GetSoal1,
+								GetSoal2,
+								GetSoal3,
+								GetSoal4,
+								GetSoal5,
+								GetSoal6,
+								GetSoal7,
+								GetSoal8,
+								GetSoal9,
+								GetSoal10,
+								GetSoal11,
+								GetSoal12,
+								GetSoal13,
+								GetSoal14,
+								GetSoal15,
+								GetSoal16,
+								GetSoal17,
+								GetSoal18,
+								GetSoal19,
+								GetSoal20,
+								GetSoal21];
+				var ss
+				var dd1=document.getElementById(d1);
+				var cc1=document.getElementById(c1);
+				var dd2=document.getElementById(d2);
+				var cc2=document.getElementById(c2);
+				var dd3=document.getElementById(d3);
+				var cc3=document.getElementById(c3);
+				var dd4=document.getElementById(d4);
+				const ctx1 = cc1.getContext("2d");ctx1.reset();ctx1.clearRect(0, 0, 1000, 1000);
+				const ctx2 = cc2.getContext("2d");ctx2.reset();ctx2.clearRect(0, 0, 1000, 1000);
+				const ctx3 = cc3.getContext("2d");ctx3.reset();ctx3.clearRect(0, 0, 1000, 1000);
+				//console.log(cc1,cc2,cc3)
+				dd1.innerHTML="";
+				dd2.innerHTML="";
+				dd3.innerHTML="";
+				dd4.innerHTML="";
+				cc1.width=0;cc1.height=0;
+				cc2.width=0;cc2.height=0;
+				cc3.width=0;cc3.height=0;
+				
+				dd1.removeAttribute("hidden");
+				dd2.removeAttribute("hidden");
+				dd3.removeAttribute("hidden");
+				dd4.removeAttribute("hidden");
+				cc1.removeAttribute("hidden");
+				cc2.removeAttribute("hidden");
+				cc3.removeAttribute("hidden");
+				
+				//dd1.innerHTML="<p>Bab 2 \u{2192} Teori Bilangan </p>";
+				dd1.innerHTML="";
+				if(no==1){
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". Diketahui n adalah penyelesaian persamaan :: </p>";
+					else			dd1.innerHTML+="<p>"+nourut+". Diketahui n adalah penyelesaian persamaan :: </p>";
+					cc1.width = 315;
+					cc1.height = 72;
+					cc2.width = 100;
+					cc2.height = 180;
+					ss = namefunc[no-1](cc1.id,cc2.id);
+					dd2.innerHTML+="<p>"+ss[0]+"</p>";
+					dd4.innerHTML+="Jawaban : "+ss[1][0];
+					hidingElemen(cc3);
+					hidingElemen(dd3);
+				}else if(no==4){
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". Perhatikan bentuk aljabar berikut: </p>";
+					else			dd1.innerHTML+="<p>"+nourut+". Perhatikan bentuk aljabar berikut: </p>";
+					cc1.width = 299;
+					cc1.height = 79;
+					ss = namefunc[no-1](cc1.id);
+					dd2.innerHTML+="<p>"+ss[0]+"</p>";
+					dd4.innerHTML+="Jawaban : "+ss[1];
+					hidingElemen(cc2);
+					hidingElemen(cc3);
+					hidingElemen(dd3);
+				}else if(no==5){
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". Perhatikan bentuk aljabar berikut: </p>";
+					else			dd1.innerHTML+="<p>"+nourut+". Perhatikan bentuk aljabar berikut: </p>";
+					cc1.width = 287;
+					cc1.height = 67;
+					ss = namefunc[no-1](cc1.id);
+					dd2.innerHTML+="<p>"+ss[0]+"</p>";
+					dd4.innerHTML+="Jawaban : "+ss[1];
+					hidingElemen(cc2);
+					hidingElemen(cc3);
+					hidingElemen(dd3);
+				}else if(no==7){
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". Nilai x yang memenuhi: </p>";
+					else			dd1.innerHTML+="<p>"+nourut+". Nilai x yang memenuhi: </p>";
+					cc1.width = 156;
+					cc1.height = 65;
+					cc2.width = 100;
+					cc2.height = 180;
+					ss = namefunc[no-1](cc1.id,cc2.id);
+					dd2.innerHTML+="<p>"+ss[0]+"</p>";
+					dd4.innerHTML+="Jawaban : "+ss[1][0];
+					hidingElemen(cc3);
+					hidingElemen(dd3);
+				}else if(no==8){
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". Untuk setiap x bilangan real,  </p>";
+					else			dd1.innerHTML+="<p>"+nourut+". Untuk setiap x bilangan real,  </p>";
+					cc1.width = 496;
+					cc1.height = 70;
+					ss = namefunc[no-1](cc1.id);
+					dd2.innerHTML+="<p>"+ss[0]+"</p>";
+					dd4.innerHTML+="Jawaban : "+ss[1];
+					hidingElemen(cc2);
+					hidingElemen(cc3);
+					hidingElemen(dd3);
+				}else if(no==18){
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". Nilai x yang memenuhi persamaan : </p>";
+					else			dd1.innerHTML+="<p>"+nourut+". Nilai x yang memenuhi persamaan : </p>";
+					cc1.width = 243;
+					cc1.height = 66;
+					ss = namefunc[no-1](cc1.id);
+					dd2.innerHTML+="<p>"+ss[0]+"</p>";
+					dd4.innerHTML+="Jawaban : "+ss[1];
+					hidingElemen(cc2);
+					hidingElemen(cc3);
+					hidingElemen(dd3);
+				}else if(no==21){
+					cc1.width = 360;
+					cc1.height = 82*4;
+					ss = namefunc[no-1](cc1.id);
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". "+ss[0]+" </p>";
+					else			dd1.innerHTML+="<p>"+nourut+". "+ss[0]+" </p>";
+					dd2.innerHTML+="<p></p>";
+					dd4.innerHTML+="Jawaban : "+ss[1];
+					hidingElemen(cc2);
+					hidingElemen(cc3);
+					hidingElemen(dd3);
+				}else {
+					ss = namefunc[no-1]();
+					if(nourut==0)	dd1.innerHTML+="<p>"+no+". "+ss[0]+"</p>";
+					else			dd1.innerHTML+="<p>"+nourut+". "+ss[0]+"</p>";
+					dd4.innerHTML+="Jawaban : "+ss[1];
+					hidingElemen(cc1);
+					hidingElemen(cc2);
+					hidingElemen(cc3);
+					hidingElemen(dd2);
+					hidingElemen(dd3);
+				}
+
+				function hidingElemen(elem){
+					//hiding elemen
+					elem.setAttribute("hidden", "hidden");
+				}
+			}
+		</script>
+		<div id="container" class="cont">
+			<div id="d11"></div>
+			<canvas id="c11"></canvas>
+			<div id="d12"></div>
+			<canvas id="c12"></canvas>
+			<div id="d13"></div>
+			<canvas id="c13"></canvas>
+			<div id="d14"></div>
+			
+			<div id="d21"></div>
+			<canvas id="c21"></canvas>
+			<div id="d22"></div>
+			<canvas id="c22"></canvas>
+			<div id="d23"></div>
+			<canvas id="c23"></canvas>
+			<div id="d24"></div>
+			
+			<div id="d31"></div>
+			<canvas id="c31"></canvas>
+			<div id="d32"></div>
+			<canvas id="c32"></canvas>
+			<div id="d33"></div>
+			<canvas id="c33"></canvas>
+			<div id="d34"></div>
+			
+			<div id="d41"></div>
+			<canvas id="c41"></canvas>
+			<div id="d42"></div>
+			<canvas id="c42"></canvas>
+			<div id="d43"></div>
+			<canvas id="c43"></canvas>
+			<div id="d44"></div>
+			
+			<div id="d51"></div>
+			<canvas id="c51"></canvas>
+			<div id="d52"></div>
+			<canvas id="c52"></canvas>
+			<div id="d53"></div>
+			<canvas id="c53"></canvas>
+			<div id="d54"></div>
+			
+			<div id="d61"></div>
+			<canvas id="c61"></canvas>
+			<div id="d62"></div>
+			<canvas id="c62"></canvas>
+			<div id="d63"></div>
+			<canvas id="c63"></canvas>
+			<div id="d64"></div>
+			
+			<div id="d71"></div>
+			<canvas id="c71"></canvas>
+			<div id="d72"></div>
+			<canvas id="c72"></canvas>
+			<div id="d73"></div>
+			<canvas id="c73"></canvas>
+			<div id="d74"></div>
+			
+			<div id="d81"></div>
+			<canvas id="c81"></canvas>
+			<div id="d82"></div>
+			<canvas id="c82"></canvas>
+			<div id="d83"></div>
+			<canvas id="c83"></canvas>
+			<div id="d84"></div>
+			
+			<div id="d91"></div>
+			<canvas id="c91"></canvas>
+			<div id="d92"></div>
+			<canvas id="c92"></canvas>
+			<div id="d93"></div>
+			<canvas id="c93"></canvas>
+			<div id="d94"></div>
+			
+			<div id="d101"></div>
+			<canvas id="c101"></canvas>
+			<div id="d102"></div>
+			<canvas id="c102"></canvas>
+			<div id="d103"></div>
+			<canvas id="c103"></canvas>
+			<div id="d104"></div>
+			
+			<div id="d111"></div>
+			<canvas id="c111"></canvas>
+			<div id="d112"></div>
+			<canvas id="c112"></canvas>
+			<div id="d113"></div>
+			<canvas id="c113"></canvas>
+			<div id="d114"></div>
+			
+			<div id="d121"></div>
+			<canvas id="c121"></canvas>
+			<div id="d122"></div>
+			<canvas id="c122"></canvas>
+			<div id="d123"></div>
+			<canvas id="c123"></canvas>
+			<div id="d124"></div>
+			
+			<div id="d131"></div>
+			<canvas id="c131"></canvas>
+			<div id="d132"></div>
+			<canvas id="c132"></canvas>
+			<div id="d133"></div>
+			<canvas id="c133"></canvas>
+			<div id="d134"></div>
+			
+			<div id="d141"></div>
+			<canvas id="c141"></canvas>
+			<div id="d142"></div>
+			<canvas id="c142"></canvas>
+			<div id="d143"></div>
+			<canvas id="c143"></canvas>
+			<div id="d144"></div>
+			
+			<div id="d151"></div>
+			<canvas id="c151"></canvas>
+			<div id="d152"></div>
+			<canvas id="c152"></canvas>
+			<div id="d153"></div>
+			<canvas id="c153"></canvas>
+			<div id="d154"></div>
+			
+			<div id="d161"></div>
+			<canvas id="c161"></canvas>
+			<div id="d162"></div>
+			<canvas id="c162"></canvas>
+			<div id="d163"></div>
+			<canvas id="c163"></canvas>
+			<div id="d164"></div>
+			
+			<div id="d171"></div>
+			<canvas id="c171"></canvas>
+			<div id="d172"></div>
+			<canvas id="c172"></canvas>
+			<div id="d173"></div>
+			<canvas id="c173"></canvas>
+			<div id="d174"></div>
+			
+			<div id="d181"></div>
+			<canvas id="c181"></canvas>
+			<div id="d182"></div>
+			<canvas id="c182"></canvas>
+			<div id="d183"></div>
+			<canvas id="c183"></canvas>
+			<div id="d184"></div>
+			
+			<div id="d191"></div>
+			<canvas id="c191"></canvas>
+			<div id="d192"></div>
+			<canvas id="c192"></canvas>
+			<div id="d193"></div>
+			<canvas id="c193"></canvas>
+			<div id="d194"></div>
+			
+			<div id="d201"></div>
+			<canvas id="c201"></canvas>
+			<div id="d202"></div>
+			<canvas id="c202"></canvas>
+			<div id="d203"></div>
+			<canvas id="c203"></canvas>
+			<div id="d204"></div>
+			
+			<div id="d211"></div>
+			<canvas id="c211"></canvas>
+			<div id="d212"></div>
+			<canvas id="c212"></canvas>
+			<div id="d213"></div>
+			<canvas id="c213"></canvas>
+			<div id="d214"></div>
+		</div>
+		<script>
+			for(var i=1;i<=21;i++){
+				Print83(i,"d"+i+"1","c"+i+"1","d"+i+"2","c"+i+"2","d"+i+"3","c"+i+"3","d"+i+"4",0);
+			}
+		</script>
+	</body>
+</html>
