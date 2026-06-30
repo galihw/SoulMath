@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			.area-mengambang {
+				/* Mengambang di atas elemen lain */
+				position: fixed; 
+				
+				/* Posisikan di pojok kanan bawah */
+				bottom: 20px; 
+				right: 20px; 
+				
+				/* Pastikan tombol selalu berada di lapisan paling atas */
+				z-index: 9998; 
+			}
+			.tombol-aksi {
+				/* Desain tombol */
+				background-color: #25d366; /* Contoh warna hijau (misal: WhatsApp) */
+				color: white;
+				padding: 15px 25px;
+				border: none;
+				border-radius: 50px;
+				font-size: 16px;
+				font-weight: bold;
+				cursor: pointer;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Efek bayangan mengambang */
+				transition: transform 0.2s ease;
+			}
+
+			.tombol-aksi:hover {
+				/* Efek saat tombol disentuh mouse */
+				transform: scale(1.05); 
+			}
+			.tombol-aksi:enabled {
+				background-color: #25d366; /* Abu-abu */
+				color: #white; /* Warna teks lebih pudar */
+				cursor: pointer; /* Kursor tanda silang/larangan */
+			}
+			.tombol-aksi:disabled {
+				background-color: #bdc3c7; /* Abu-abu */
+				color: #7f8c8d; /* Warna teks lebih pudar */
+				cursor: not-allowed; /* Kursor tanda silang/larangan */
+			}
+			
+			/* Styling Kolom (Elemen Induk) */
+			.kolom {
+				display: flex;
+				justify-content: center; /* Memusatkan horizontal */
+				align-items: center;    /* Memusatkan vertikal */
+				height: 400px;          /* Sesuaikan tinggi kolom Anda */
+				background-color: #f0f2f5;
+			}
+
+			/* Styling Kotak Mengambang */
+			.kotak-mengambang {
+				background-color: #ffffff;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Efek mengambang */
+				text-align: center;
+				max-width: 100%; /* Lebar maksimal kotak */
+			}
+			
+			/* Styling Kotak Mengambang Rata Kiri */
+			.kotak-mengambangkiri {
+				background-color: #ffffff;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Efek mengambang */
+				text-align: left;
+				max-width: 100%; /* Lebar maksimal kotak */
+			}
+			.ratatengah {
+				text-align: center;
+			}
+			
+			.area-Navigasi {
+				/* Mengambang di atas elemen lain */
+				position: fixed; 
+				
+				/* Posisikan di pojok kanan bawah */
+				background-color: #ffffff;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Efek mengambang */
+				text-align: center;
+				max-width: 100%; /* Lebar maksimal kotak */
+				
+				top: 50%;        /* Posisi setengah layar dari atas */
+				left: 50%;       /* Posisi setengah layar dari kiri */
+				transform: translate(-50%, -50%); /* Menggeser elemen agar benar-benar berada di titik tengah */
+   
+				
+				
+				/* Pastikan tombol selalu berada di lapisan paling atas */
+				z-index: 9999; 
+			}
+			.kotak-mengambangtengah {
+				background-color: #ffffff;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Efek mengambang */
+				text-align: center;
+				max-width: 100%; /* Lebar maksimal kotak */
+			}
+			
+			.container-kotak {
+				display: grid;
+				grid-template-columns: repeat(6, 1fr); /* 6 Kolom */
+				grid-template-rows: repeat(5, 1fr);    /* 5 Baris */
+				gap: 10px; /* Jarak antar kotak */
+				width: 100%;
+				max-width: 800px;
+			}
+			
+			.kotak {
+				background-color: #3498db;
+				color: white;
+				padding: 20px 0;
+				text-align: center;
+				font-family: Arial, sans-serif;
+				font-weight: bold;
+				
+				-webkit-user-select: none; /* Safari */
+				-moz-user-select: none;    /* Firefox */
+				-ms-user-select: none;     /* Internet Explorer/Edge */
+				user-select: none;         /* Standard syntax (Chrome, Opera, Edge) */
+			}
+			
+			.tombol-no {
+				/* Desain tombol */
+				background-color: #d3d3d3; /* Contoh warna hijau (misal: WhatsApp) */
+				color: white;
+				padding: 15px 25px;
+				border: none;
+				border-radius: 50px;
+				font-size: 14px;
+				font-weight: bold;
+				cursor: pointer;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Efek bayangan mengambang */
+				transition: transform 0.2s ease;
+			}
+
+			.tombol-no:hover {
+				/* Efek saat tombol disentuh mouse */
+				transform: scale(1.05); 
+			}
+			.tombol-aktif {
+				/* Tambahkan bingkai */
+				border: 2px solid #007bff;
+			}
+
+			/* Efek saat kursor diarahkan ke tombol */
+			.tombol-aktif:hover {
+				background-color: #007bff;
+				color: white;
+			}
+			
+			.tombol-isi {
+				/* Desain tombol */
+				background-color: #25d366 ; /* warna ada isi ABCD */
+				color: white;
+				padding: 15px 25px;
+				/*border: none;*/
+				/*border-radius: 50px;*/
+				font-size: 14px;
+				font-weight: bold;
+				cursor: pointer;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Efek bayangan mengambang */
+				transition: transform 0.2s ease;
+			}
+			.tombol-isi:hover {
+			}
+			
+			
+			
+			/*Untuk Kotak Split KIRI dan KANAN*/
+			.kotak-utama {
+				width: 100%; /* Membuat kotak utama full width */
+				display: flex; /* Mengaktifkan fitur Flexbox */
+			}
+
+			/* Mengatur ukuran masing-masing kolom menjadi sama lebar */
+			.kolom-kiri, .kolom-kanan {
+				flex: 1; /* Membagi lebar sama rata (50% : 50%) */
+				padding: 20px; /* Jarak di dalam kotak */
+				box-sizing: border-box; /* Memastikan padding tidak merusak lebar */
+				text-align: center;
+			}
+
+			/* Opsional: Tambahkan warna atau background agar terlihat perbedaannya */
+			.kolom-kiri {
+				background-color: #f1f1f1;
+			}
+
+			.kolom-kanan {
+				background-color: #e2e2e2;
+			}
+
+			/* Responsif: Jika dibuka di layar kecil (HP), kolom ditumpuk ke bawah */
+			@media (max-width: 768px) {
+				.kotak-utama {
+					flex-direction: column; 
+				}
+			}
+			.terlihat {
+				/*visibility: visible*/
+				display: flex
+			}
+			.takterlihat {
+				/*visibility: hidden*/
+				display: none
+			}
+			
+			
+			.tombol-Review {
+				/* Desain tombol */
+				background-color: #d3d3d3;
+				color: white;
+				padding: 15px 25px;
+				border: none;
+				border-radius: 50px;
+				font-size: 14px;
+				font-weight: bold;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Efek bayangan mengambang */
+				-webkit-user-select: none; /* Safari */
+				-moz-user-select: none;    /* Firefox */
+				-ms-user-select: none;     /* Internet Explorer/Edge */
+				user-select: none;         /* Standard syntax (Chrome, Opera, Edge) */
+			}
+			.tombol-benar {
+				background-color: #25d366;
+			}
+			.tombol-salah {
+				background-color: #800000;
+			}
+			
+			
+			/*fade in - transisi*/
+			.delayed-box {
+				opacity: 0;
+				animation: fadeIn 1s forwards;
+				animation-delay: 1s; /* Sets the 1-second wait */
+			}
+
+			@keyframes fadeIn {
+				to { opacity: 1; }
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="delayed-box">
+			<button class="model" onclick="FuncHome()">Home</button>
+			<h2 class="kotak-mengambang">Kelas 9 - Bab 1 - Bab 4</h2>
+			<a href="https://www.defantri.com">Sumber soal statis</a>
+			<div id="timer" class="kotak-mengambang"></div>
+			
+			<script type="text/javascript" src="./Dir91.js"></script>
+			<script type="text/javascript" src="./Dir92.js"></script>
+			<script type="text/javascript" src="./Dir93.js"></script>
+			<script type="text/javascript" src="./Dir94.js"></script>
+			
+			<div id="Kumpul" class="kotak-utama">
+				<div class="kolom-kiri">
+					<p>Review Nomor</p>
+					<hr class="garis-panjang">
+					<div class="container-kotak">
+						<div id="KotakR1" class="tombol-Review">1</div>
+						<div id="KotakR2" class="tombol-Review">2</div>
+						<div id="KotakR3" class="tombol-Review">3</div>
+						<div id="KotakR4" class="tombol-Review">4</div>
+						<div id="KotakR5" class="tombol-Review">5</div>
+						<div id="KotakR6" class="tombol-Review">6</div>
+						<div id="KotakR7" class="tombol-Review">7</div>
+						<div id="KotakR8" class="tombol-Review">8</div>
+						<div id="KotakR9" class="tombol-Review">9</div>
+						<div id="KotakR10" class="tombol-Review">10</div>
+						<div id="KotakR11" class="tombol-Review">11</div>
+						<div id="KotakR12" class="tombol-Review">12</div>
+						<div id="KotakR13" class="tombol-Review">13</div>
+						<div id="KotakR14" class="tombol-Review">14</div>
+						<div id="KotakR15" class="tombol-Review">15</div>
+						<div id="KotakR16" class="tombol-Review">16</div>
+						<div id="KotakR17" class="tombol-Review">17</div>
+						<div id="KotakR18" class="tombol-Review">18</div>
+						<div id="KotakR19" class="tombol-Review">19</div>
+						<div id="KotakR20" class="tombol-Review">20</div>
+						<div id="KotakR21" class="tombol-Review">21</div>
+						<div id="KotakR22" class="tombol-Review">22</div>
+						<div id="KotakR23" class="tombol-Review">23</div>
+						<div id="KotakR24" class="tombol-Review">24</div>
+						<div id="KotakR25" class="tombol-Review">25</div>
+						<div id="KotakR26" class="tombol-Review">26</div>
+						<div id="KotakR27" class="tombol-Review">27</div>
+						<div id="KotakR28" class="tombol-Review">28</div>
+						<div id="KotakR29" class="tombol-Review">29</div>
+						<div id="KotakR30" class="tombol-Review">30</div>
+					</div>
+				</div>
+				<div class="kolom-kanan">
+					<p>Review Nilai</p>
+					<hr class="garis-panjang">
+					<div id="benar"></div>
+					<div id="salah"></div>
+					<div id="nilai"></div>
+				</div>
+			</div>
+			
+			<div id="Navigasi" class="area-Navigasi">
+				Pilih Nomor<br>
+				<br>
+				<div class="container-kotak">
+					<div id="Kotak1" class="tombol-no" onclick="SoalShowHide(1)">1</div>
+					<div id="Kotak2" class="tombol-no" onclick="SoalShowHide(2)">2</div>
+					<div id="Kotak3" class="tombol-no" onclick="SoalShowHide(3)">3</div>
+					<div id="Kotak4" class="tombol-no" onclick="SoalShowHide(4)">4</div>
+					<div id="Kotak5" class="tombol-no" onclick="SoalShowHide(5)">5</div>
+					<div id="Kotak6" class="tombol-no" onclick="SoalShowHide(6)">6</div>
+					<div id="Kotak7" class="tombol-no" onclick="SoalShowHide(7)">7</div>
+					<div id="Kotak8" class="tombol-no" onclick="SoalShowHide(8)">8</div>
+					<div id="Kotak9" class="tombol-no" onclick="SoalShowHide(9)">9</div>
+					<div id="Kotak10" class="tombol-no" onclick="SoalShowHide(10)">10</div>
+					<div id="Kotak11" class="tombol-no" onclick="SoalShowHide(11)">11</div>
+					<div id="Kotak12" class="tombol-no" onclick="SoalShowHide(12)">12</div>
+					<div id="Kotak13" class="tombol-no" onclick="SoalShowHide(13)">13</div>
+					<div id="Kotak14" class="tombol-no" onclick="SoalShowHide(14)">14</div>
+					<div id="Kotak15" class="tombol-no" onclick="SoalShowHide(15)">15</div>
+					<div id="Kotak16" class="tombol-no" onclick="SoalShowHide(16)">16</div>
+					<div id="Kotak17" class="tombol-no" onclick="SoalShowHide(17)">17</div>
+					<div id="Kotak18" class="tombol-no" onclick="SoalShowHide(18)">18</div>
+					<div id="Kotak19" class="tombol-no" onclick="SoalShowHide(19)">19</div>
+					<div id="Kotak20" class="tombol-no" onclick="SoalShowHide(20)">20</div>
+					<div id="Kotak21" class="tombol-no" onclick="SoalShowHide(21)">21</div>
+					<div id="Kotak22" class="tombol-no" onclick="SoalShowHide(22)">22</div>
+					<div id="Kotak23" class="tombol-no" onclick="SoalShowHide(23)">23</div>
+					<div id="Kotak24" class="tombol-no" onclick="SoalShowHide(24)">24</div>
+					<div id="Kotak25" class="tombol-no" onclick="SoalShowHide(25)">25</div>
+					<div id="Kotak26" class="tombol-no" onclick="SoalShowHide(26)">26</div>
+					<div id="Kotak27" class="tombol-no" onclick="SoalShowHide(27)">27</div>
+					<div id="Kotak28" class="tombol-no" onclick="SoalShowHide(28)">28</div>
+					<div id="Kotak29" class="tombol-no" onclick="SoalShowHide(29)">29</div>
+					<div id="Kotak30" class="tombol-no" onclick="SoalShowHide(30)">30</div>
+				</div>
+			</div>
+			
+			<div id="Pembukaan" class="kotak-mengambangtengah">
+				Selamat datang di Simulasi Tes Matematika<br>
+				Untuk memulai klik tombol "Mulai"<br>
+				Selamat Mengerjakan
+			</div>
+			
+			<div id="container" class="kotak-mengambangkiri">
+				<div id="Nomor1">
+					<div id="d11"></div>
+					<canvas id="c11"></canvas>
+					<div id="d12"></div>
+					<canvas id="c12"></canvas>
+					<div id="d13"></div>
+					<canvas id="c13"></canvas>
+					<div id="d14"></div>
+					<form id="myForm1">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan1" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan1" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan1" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan1" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor2">
+					<div id="d21"></div>
+					<canvas id="c21"></canvas>
+					<div id="d22"></div>
+					<canvas id="c22"></canvas>
+					<div id="d23"></div>
+					<canvas id="c23"></canvas>
+					<div id="d24"></div>
+					<form id="myForm2">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan2" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan2" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan2" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan2" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor3">
+					<div id="d31"></div>
+					<canvas id="c31"></canvas>
+					<div id="d32"></div>
+					<canvas id="c32"></canvas>
+					<div id="d33"></div>
+					<canvas id="c33"></canvas>
+					<div id="d34"></div>
+					<form id="myForm3">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan3" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan3" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan3" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan3" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor4">
+					<div id="d41"></div>
+					<canvas id="c41"></canvas>
+					<div id="d42"></div>
+					<canvas id="c42"></canvas>
+					<div id="d43"></div>
+					<canvas id="c43"></canvas>
+					<div id="d44"></div>
+					<form id="myForm4">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan4" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan4" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan4" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan4" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor5">
+					<div id="d51"></div>
+					<canvas id="c51"></canvas>
+					<div id="d52"></div>
+					<canvas id="c52"></canvas>
+					<div id="d53"></div>
+					<canvas id="c53"></canvas>
+					<div id="d54"></div>
+					<form id="myForm5">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan5" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan5" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan5" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan5" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor6">
+					<div id="d61"></div>
+					<canvas id="c61"></canvas>
+					<div id="d62"></div>
+					<canvas id="c62"></canvas>
+					<div id="d63"></div>
+					<canvas id="c63"></canvas>
+					<div id="d64"></div>
+					<form id="myForm6">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan6" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan6" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan6" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan6" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor7">
+					<div id="d71"></div>
+					<canvas id="c71"></canvas>
+					<div id="d72"></div>
+					<canvas id="c72"></canvas>
+					<div id="d73"></div>
+					<canvas id="c73"></canvas>
+					<div id="d74"></div>
+					<form id="myForm7">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan7" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan7" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan7" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan7" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor8">
+					<div id="d81"></div>
+					<canvas id="c81"></canvas>
+					<div id="d82"></div>
+					<canvas id="c82"></canvas>
+					<div id="d83"></div>
+					<canvas id="c83"></canvas>
+					<div id="d84"></div>
+					<form id="myForm8">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan8" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan8" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan8" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan8" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor9">
+					<div id="d91"></div>
+					<canvas id="c91"></canvas>
+					<div id="d92"></div>
+					<canvas id="c92"></canvas>
+					<div id="d93"></div>
+					<canvas id="c93"></canvas>
+					<div id="d94"></div>
+					<form id="myForm9">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan9" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan9" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan9" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan9" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor10">
+					<div id="d101"></div>
+					<canvas id="c101"></canvas>
+					<div id="d102"></div>
+					<canvas id="c102"></canvas>
+					<div id="d103"></div>
+					<canvas id="c103"></canvas>
+					<div id="d104"></div>
+					<form id="myForm10">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan10" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan10" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan10" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan10" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor11">
+					<div id="d111"></div>
+					<canvas id="c111"></canvas>
+					<div id="d112"></div>
+					<canvas id="c112"></canvas>
+					<div id="d113"></div>
+					<canvas id="c113"></canvas>
+					<div id="d114"></div>
+					<form id="myForm11">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan11" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan11" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan11" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan11" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor12">
+					<div id="d121"></div>
+					<canvas id="c121"></canvas>
+					<div id="d122"></div>
+					<canvas id="c122"></canvas>
+					<div id="d123"></div>
+					<canvas id="c123"></canvas>
+					<div id="d124"></div>
+					<form id="myForm12">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan12" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan12" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan12" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan12" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor13">
+					<div id="d131"></div>
+					<canvas id="c131"></canvas>
+					<div id="d132"></div>
+					<canvas id="c132"></canvas>
+					<div id="d133"></div>
+					<canvas id="c133"></canvas>
+					<div id="d134"></div>
+					<form id="myForm13">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan13" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan13" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan13" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan13" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor14">
+					<div id="d141"></div>
+					<canvas id="c141"></canvas>
+					<div id="d142"></div>
+					<canvas id="c142"></canvas>
+					<div id="d143"></div>
+					<canvas id="c143"></canvas>
+					<div id="d144"></div>
+					<form id="myForm14">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan14" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan14" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan14" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan14" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor15">
+					<div id="d151"></div>
+					<canvas id="c151"></canvas>
+					<div id="d152"></div>
+					<canvas id="c152"></canvas>
+					<div id="d153"></div>
+					<canvas id="c153"></canvas>
+					<div id="d154"></div>
+					<form id="myForm15">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan15" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan15" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan15" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan15" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor16">
+					<div id="d161"></div>
+					<canvas id="c161"></canvas>
+					<div id="d162"></div>
+					<canvas id="c162"></canvas>
+					<div id="d163"></div>
+					<canvas id="c163"></canvas>
+					<div id="d164"></div>
+					<form id="myForm16">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan16" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan16" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan16" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan16" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor17">
+					<div id="d171"></div>
+					<canvas id="c171"></canvas>
+					<div id="d172"></div>
+					<canvas id="c172"></canvas>
+					<div id="d173"></div>
+					<canvas id="c173"></canvas>
+					<div id="d174"></div>
+					<form id="myForm17">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan17" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan17" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan17" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan17" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor18">
+					<div id="d181"></div>
+					<canvas id="c181"></canvas>
+					<div id="d182"></div>
+					<canvas id="c182"></canvas>
+					<div id="d183"></div>
+					<canvas id="c183"></canvas>
+					<div id="d184"></div>
+					<form id="myForm18">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan18" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan18" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan18" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan18" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor19">
+					<div id="d191"></div>
+					<canvas id="c191"></canvas>
+					<div id="d192"></div>
+					<canvas id="c192"></canvas>
+					<div id="d193"></div>
+					<canvas id="c193"></canvas>
+					<div id="d194"></div>
+					<form id="myForm19">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan19" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan19" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan19" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan19" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor20">
+					<div id="d201"></div>
+					<canvas id="c201"></canvas>
+					<div id="d202"></div>
+					<canvas id="c202"></canvas>
+					<div id="d203"></div>
+					<canvas id="c203"></canvas>
+					<div id="d204"></div>
+					<form id="myForm20">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan20" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan20" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan20" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan20" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor21">
+					<div id="d211"></div>
+					<canvas id="c211"></canvas>
+					<div id="d212"></div>
+					<canvas id="c212"></canvas>
+					<div id="d213"></div>
+					<canvas id="c213"></canvas>
+					<div id="d214"></div>
+					<form id="myForm21">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan21" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan21" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan21" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan21" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor22">
+					<div id="d221"></div>
+					<canvas id="c221"></canvas>
+					<div id="d222"></div>
+					<canvas id="c222"></canvas>
+					<div id="d223"></div>
+					<canvas id="c223"></canvas>
+					<div id="d224"></div>
+					<form id="myForm22">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan22" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan22" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan22" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan22" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor23">
+					<div id="d231"></div>
+					<canvas id="c231"></canvas>
+					<div id="d232"></div>
+					<canvas id="c232"></canvas>
+					<div id="d233"></div>
+					<canvas id="c233"></canvas>
+					<div id="d234"></div>
+					<form id="myForm23">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan23" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan23" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan23" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan23" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor24">
+					<div id="d241"></div>
+					<canvas id="c241"></canvas>
+					<div id="d242"></div>
+					<canvas id="c242"></canvas>
+					<div id="d243"></div>
+					<canvas id="c243"></canvas>
+					<div id="d244"></div>
+					<form id="myForm24">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan24" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan24" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan24" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan24" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor25">
+					<div id="d251"></div>
+					<canvas id="c251"></canvas>
+					<div id="d252"></div>
+					<canvas id="c252"></canvas>
+					<div id="d253"></div>
+					<canvas id="c253"></canvas>
+					<div id="d254"></div>
+					<form id="myForm25">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan25" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan25" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan25" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan25" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor26">
+					<div id="d261"></div>
+					<canvas id="c261"></canvas>
+					<div id="d262"></div>
+					<canvas id="c262"></canvas>
+					<div id="d263"></div>
+					<canvas id="c263"></canvas>
+					<div id="d264"></div>
+					<form id="myForm26">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan26" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan26" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan26" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan26" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor27">
+					<div id="d271"></div>
+					<canvas id="c271"></canvas>
+					<div id="d272"></div>
+					<canvas id="c272"></canvas>
+					<div id="d273"></div>
+					<canvas id="c273"></canvas>
+					<div id="d274"></div>
+					<form id="myForm27">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan27" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan27" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan27" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan27" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor28">
+					<div id="d281"></div>
+					<canvas id="c281"></canvas>
+					<div id="d282"></div>
+					<canvas id="c282"></canvas>
+					<div id="d283"></div>
+					<canvas id="c283"></canvas>
+					<div id="d284"></div>
+					<form id="myForm28">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan28" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan28" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan28" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan28" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor29">
+					<div id="d291"></div>
+					<canvas id="c291"></canvas>
+					<div id="d292"></div>
+					<canvas id="c292"></canvas>
+					<div id="d293"></div>
+					<canvas id="c293"></canvas>
+					<div id="d294"></div>
+					<form id="myForm29">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan29" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan29" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan29" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan29" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div id="Nomor30">
+					<div id="d301"></div>
+					<canvas id="c301"></canvas>
+					<div id="d302"></div>
+					<canvas id="c302"></canvas>
+					<div id="d303"></div>
+					<canvas id="c303"></canvas>
+					<div id="d304"></div>
+					<form id="myForm30">
+						<p>Pilihan:
+						<label><input type="radio" name="pilihan30" onclick="Masuk('A')"> A</label>
+						<label><input type="radio" name="pilihan30" onclick="Masuk('B')"> B</label>
+						<label><input type="radio" name="pilihan30" onclick="Masuk('C')"> C</label>
+						<label><input type="radio" name="pilihan30" onclick="Masuk('D')"> D</label>
+						</p>
+					</form>
+				</div>
+				
+				<div class="area-mengambang">
+					<button class="tombol-aksi" id = "tMulai"  		onclick="Memulai()">Mulai</button>
+					<button class="tombol-aksi" id = "tNav"   		onclick="Navigasi()">≡</button>
+					<button class="tombol-aksi" id = "tPrev"   		onclick="Prev()">Sebelum</button>
+					<button class="tombol-aksi" id = "tNext"   		onclick="Next()">Berikut</button>
+					<button class="tombol-aksi" id = "tKumpul" 		onclick="Kumpulkan()">Kumpulkan</button>
+					<button class="tombol-aksi" id = "tUlang"  	onclick="Ulang()">Ulang</button>
+					<button class="tombol-aksi" id = "tSoalBaru"  	onclick="SoalBaru()">Soal Baru</button>
+				</div>
+			</div>
+		</div>
+		<script>
+			function RandomMyArray(Arr){
+				for (var i=0; i<Arr.length; i++){
+					var r = Math.floor(Math.random() * Arr.length);
+					var a = Arr[i];
+					Arr[i] = Arr[r];
+					Arr[r] = a;
+				}
+				return Arr
+			}
+			var arUrut = []
+			arUrut[0] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+			arUrut[1] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+			arUrut[2] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+			arUrut[3] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+			
+			for(var i=0;i<4;i++)arUrut[i]=RandomMyArray(arUrut[i]);
+			
+			var nmFuncs = []
+			nmFuncs = [
+						  [Print91,arUrut[0],0],
+						  [Print91,arUrut[0],1],
+						  [Print91,arUrut[0],2],
+						  [Print91,arUrut[0],3],
+						  [Print91,arUrut[0],4],
+						  [Print91,arUrut[0],5],
+						  [Print91,arUrut[0],6],
+						  [Print91,arUrut[0],7],
+						  
+						  [Print92,arUrut[1],0],
+						  [Print92,arUrut[1],1],
+						  [Print92,arUrut[1],2],
+						  [Print92,arUrut[1],3],
+						  [Print92,arUrut[1],4],
+						  [Print92,arUrut[1],5],
+						  [Print92,arUrut[1],6],
+						  [Print92,arUrut[1],7],
+						  
+						  [Print93,arUrut[2],0],
+						  [Print93,arUrut[2],1],
+						  [Print93,arUrut[2],2],
+						  [Print93,arUrut[2],3],
+						  [Print93,arUrut[2],4],
+						  [Print93,arUrut[2],5],
+						  [Print93,arUrut[2],6],
+						  
+						  [Print94,arUrut[3],0],
+						  [Print94,arUrut[3],1],
+						  [Print94,arUrut[3],2],
+						  [Print94,arUrut[3],3],
+						  [Print94,arUrut[3],4],
+						  [Print94,arUrut[3],5],
+						  [Print94,arUrut[3],6]
+					  ];
+						  
+			nmFuncs=RandomMyArray(nmFuncs);
+			
+			var nNo = 0;
+			var nNoOld = 0;
+			var noMax = 30;
+			var noTrue = 0;
+			var NoFalse = noMax;
+			var arPilih = [];
+			var arKunci = [];
+			document.getElementById("Navigasi").setAttribute("hidden", "hidden");
+			ViewKotak();
+			document.getElementById("Pembukaan").removeAttribute("hidden");
+			document.getElementById("Kumpul").classList.remove("terlihat");
+			document.getElementById("Kumpul").classList.add("takterlihat");
+			
+			SoalShowHide(nNo);
+			fLihatSoal();
+			ResetKunci();
+			Tombol(1);
+			
+			function Navigasi(){
+				if (document.getElementById("Navigasi").hidden){
+					document.getElementById("Navigasi").removeAttribute("hidden");
+				}else{
+					document.getElementById("Navigasi").setAttribute("hidden", "hidden");
+				}
+			}
+			function ViewKotak(){
+				for(var i=1;i<=30;i++){
+					if(i>noMax){
+						document.getElementById("Kotak"+i).setAttribute("hidden", "hidden");
+						document.getElementById("KotakR"+i).setAttribute("hidden", "hidden");
+					}
+				}
+			}
+			function StringDesimal(ff){
+				var strff = ""+ff;
+				const gg = strff.split(".");
+				if(gg.length==2)	return gg[0]+","+gg[1];
+				else 				return ff
+			}
+			function Masuk(abj){
+				arPilih[nNo-1] = abj;
+				CekBenar();
+				document.getElementById("Kotak"+nNo).classList.add("tombol-isi");
+				document.getElementById("Navigasi").setAttribute("hidden", "hidden");
+			}
+			function Ulang(){
+				nNo = 0;
+				nNoOld = 0;
+				noTrue = 0;
+				NoFalse = noMax;
+				arPilih = [];
+				arKunci = [];
+				document.getElementById("Navigasi").setAttribute("hidden", "hidden");
+				ViewKotak();
+				document.getElementById("Pembukaan").removeAttribute("hidden");
+				document.getElementById("Kumpul").classList.remove("terlihat");
+				document.getElementById("Kumpul").classList.add("takterlihat");
+				
+				SoalShowHide(nNo);
+				//fLihatSoal();
+				ResetKunci();
+				Tombol(1);
+				
+				waktu = 40 * 60;
+				eTimer=document.getElementById("timer");
+				eTimer.innerHTML = "Waktu : 40:00";
+				selesai = false;
+				
+				for(var i=1;i<=noMax;i++){
+					var myForm = document.getElementById("myForm"+i);
+					var formElements = myForm.elements;
+					for (var j=0;j<formElements.length;j++) {
+						formElements[j].checked = false;
+					}
+				}
+				
+			}
+			function SoalBaru(){
+				let url = window.location.pathname;
+				window.parent.location.href=url;
+			}
+			function CekBenar(){
+				var pilTrue = 0;
+				var pilMax = noMax
+				var pilFalse = 0;
+				for(var i=0;i<noMax;i++){
+					if(arKunci[i]==arPilih[i]){
+						pilTrue++;
+						document.getElementById("KotakR"+(i+1)).classList.remove("tombol-salah");
+						document.getElementById("KotakR"+(i+1)).classList.add("tombol-benar");
+					}else{
+						document.getElementById("KotakR"+(i+1)).classList.remove("tombol-benar");
+						document.getElementById("KotakR"+(i+1)).classList.add("tombol-salah");
+					}
+				}
+				pilFalse = pilMax - pilTrue;
+				var Nilai = Math.floor(pilTrue/pilMax * 10000)/100;
+				//console.log(pilTrue+""+pilFalse+""+pilMax);
+				
+				document.getElementById("benar").innerHTML = "Benar = "+pilTrue;
+				document.getElementById("salah").innerHTML = "Salah = "+pilFalse;
+				document.getElementById("nilai").innerHTML = "Nilai = "+StringDesimal(Nilai);
+				document.getElementById("nilai").style.fontSize = "24px"; 
+			}
+			function Kumpulkan(){
+				CekBenar();
+				SoalShowHide(0);
+				document.getElementById("Kumpul").classList.remove("takterlihat");
+				document.getElementById("Kumpul").classList.add("terlihat");
+				Tombol(3);
+				selesai = true; // setelah klik kumpulkan
+			}
+			
+			function fLihatSoal(){
+				for(var i=1;i<=noMax;i++){
+					var dd1 = "d"+i+"1";
+					var dd2 = "d"+i+"2";
+					var dd3 = "d"+i+"3";
+					var dd4 = "d"+i+"4";
+					var cc1 = "c"+i+"1";
+					var cc2 = "c"+i+"2";
+					var cc3 = "c"+i+"3";
+					//Print81(i,dd1,cc1,dd2,cc2,dd3,cc3,dd4,0);
+					var namaFc = nmFuncs[i-1][0]
+					var noSoal = nmFuncs[i-1][1][nmFuncs[i-1][2]]
+					namaFc(noSoal,dd1,cc1,dd2,cc2,dd3,cc3,dd4,i);
+					document.getElementById(dd4).setAttribute("hidden", "hidden");
+				}
+			}
+			function ResetKunci(){
+				for(var i=1;i<=noMax;i++){
+					var str = document.getElementById("d"+i+"4").innerHTML;
+					var keys = str.substr(str.length-1,1);
+					arKunci[i-1] = keys;
+					arPilih[i-1] = "";
+					
+					document.getElementById("Kotak"+i).classList.remove("tombol-aktif");
+					document.getElementById("Kotak"+i).classList.remove("tombol-isi");
+				}
+			}
+			
+			function Prev(){
+				nNoOld = nNo;
+				nNo--;
+				nNo = Math.max(nNo,1);
+				SoalShowHide(nNo);
+			}
+			function Next(){
+				nNoOld = nNo;
+				nNo++;
+				nNo = Math.min(nNo,noMax);
+				SoalShowHide(nNo);
+			}
+			function disableButton(n){
+				document.getElementById("tPrev").disabled = false;
+				document.getElementById("tNext").disabled = false;
+				if(n==noMax){
+					document.getElementById("tNext").disabled = true;
+				}else if(n==1){
+					document.getElementById("tPrev").disabled = true;
+				}				
+			}
+			function SoalShowHide(nom){
+				disableButton(nom);
+				nNo=nom;
+				if(nNo>0){
+					document.getElementById("Kotak"+nNo).classList.add("tombol-aktif");
+				}
+				if(nNoOld>0 && nNoOld!==nNo){
+					document.getElementById("Kotak"+nNoOld).classList.remove("tombol-aktif");
+				}
+				nNoOld = nNo;
+				
+				document.getElementById("Navigasi").setAttribute("hidden", "hidden");
+				
+				for(var i=1;i<=30;i++){
+					if(i==nNo)		document.getElementById("Nomor"+i).removeAttribute("hidden");
+					else			document.getElementById("Nomor"+i).setAttribute("hidden", "hidden");
+				}
+			}
+			function Tombol(mode){
+				var tMulai=document.getElementById("tMulai");
+				var tNavi=document.getElementById("tNav");
+				var tPrev=document.getElementById("tPrev");
+				var tNext=document.getElementById("tNext");
+				var tKumpul=document.getElementById("tKumpul");
+				var tSoalBaru=document.getElementById("tSoalBaru");
+				var tUlang=document.getElementById("tUlang");
+				
+				if(mode==1){
+					tMulai.removeAttribute("hidden");
+					tNavi.setAttribute("hidden", "hidden");
+					tPrev.setAttribute("hidden", "hidden");
+					tNext.setAttribute("hidden", "hidden");
+					tKumpul.setAttribute("hidden", "hidden");
+					tSoalBaru.setAttribute("hidden", "hidden");
+					tUlang.setAttribute("hidden", "hidden");
+				}else if(mode==2){
+					tMulai.setAttribute("hidden", "hidden");
+					tNavi.removeAttribute("hidden");
+					tPrev.removeAttribute("hidden");
+					tNext.removeAttribute("hidden");
+					tKumpul.removeAttribute("hidden");
+					tSoalBaru.setAttribute("hidden", "hidden");
+					tUlang.setAttribute("hidden", "hidden");
+				}else{
+					tMulai.setAttribute("hidden", "hidden");
+					tNavi.setAttribute("hidden", "hidden");
+					tPrev.setAttribute("hidden", "hidden");
+					tNext.setAttribute("hidden", "hidden");
+					tKumpul.setAttribute("hidden", "hidden");
+					tSoalBaru.removeAttribute("hidden");
+					tUlang.removeAttribute("hidden");
+				}
+			}
+		</script>
+		<script>
+			// Durasi dalam detik (40 menit * 60 detik)
+			let waktu = 40 * 60;
+			var eTimer=document.getElementById("timer");
+			eTimer.innerHTML = "Waktu : 40:00";
+			var selesai = false; // untuk menghentikan waktu sekaligus keluar nilai
+			Tombol(1);
+			
+			function Memulai(){
+				Tombol(2);
+				
+				nNoOld = 0;
+				nNo = 1;
+				SoalShowHide(nNo);
+				document.getElementById("Pembukaan").setAttribute("hidden", "hidden");
+				
+				const timer = setInterval(function() {
+					// Menghitung menit dan detik tersisa
+					let menit = Math.floor(waktu / 60);
+					let detik = waktu % 60;
+
+					// Menambahkan angka '0' di depan jika nilai di bawah 10
+					menit = menit < 10 ? "0" + menit : menit;
+					detik = detik < 10 ? "0" + detik : detik;
+
+					// Hentikan timer jika waktu habis
+					if (waktu <= 0 || selesai) {
+						clearInterval(timer);
+						//alert("Waktu 40 menit telah habis!");
+						Kumpulkan();
+					}
+					
+					eTimer.innerHTML = "Waktu : "+menit + ":" + detik
+					waktu--;
+				}, 1000);
+			}
+			function FuncHome(){
+				window.parent.location.href="index.html";
+			}
+		</script>
+		
+	</body>
+</html>
